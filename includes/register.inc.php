@@ -3,8 +3,8 @@
 if($_SERVER["REQUEST_METHOD"] === "POST"){
     $fullname = $_POST["fullname"];
     $email = $_POST["email"];
-    $username = $_POST["username"];
-    $password = $_POST["password"];
+    $uname = $_POST["username"];
+    $pass = $_POST["password"];
 
     try {
         require_once "./db_handler.inc.php";
@@ -16,7 +16,8 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         $errors = [];
 
         // Check for empty inputs
-        if(is_input_empty($fullname, $email, $username, $password)){
+        if(is_input_empty($fullname, $email, $uname, $pass)){
+            // make sure to use local variables here
             $errors["empty_input"] = "Please fill in all fields";
         }
 
@@ -27,7 +28,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         }
 
         // Check if username is taken
-        if(is_username_taken($pdo, $username)){
+        if(is_username_taken($pdo, $uname)){
             $errors["username_taken"] = "Username is already taken";
 
         }
