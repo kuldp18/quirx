@@ -1,5 +1,9 @@
 /* Blocks */
 
+body {
+  position: relative;
+}
+
 .registration {
   min-height: 100vh;
   padding: 2rem;
@@ -8,6 +12,23 @@
   justify-content: center;
   align-items: center;
   font-size: 1.5rem;
+}
+
+.error {
+  background-color: rgb(210, 25, 25);
+  color: whitesmoke;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  padding: 3rem 2rem;
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  border: 4px solid white;
+  z-index: 2;
 }
 
 /* Elements */
@@ -46,4 +67,11 @@
 .registration__btn:hover {
   cursor: pointer;
   background-color: rgba(22, 122, 235, 0.906);
+}
+
+.error__title {
+  font-size: 2rem;
+}
+.error__item {
+  font-size: 1.5rem;
 }
