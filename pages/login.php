@@ -12,7 +12,7 @@
       <h1 class="login__title">Login to Quirx</h1>
       <h3 class="subheading">
         New to Quirx? Register
-        <a href="./register.html" class="login__link">here</a>.
+        <a href="./register.php" class="login__link">here</a>.
       </h3>
       <form class="login__form">
         <input type="email" name="email" placeholder="Enter email" required />
