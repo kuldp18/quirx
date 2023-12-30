@@ -1,3 +1,8 @@
+<?php
+require_once "../includes/config_session.inc.php";
+require_once "../views/register.inc.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -14,28 +19,35 @@
         Already an user? Login
         <a href="./login.php" class="registration__link">here</a>.
       </h3>
-      <form class="registration__form">
+      <form class="registration__form" method="post" action="../includes/register.inc.php">
         <input
           type="text"
           name="fullname"
           placeholder="Enter full name"
-          required
         />
-        <input type="email" name="email" placeholder="Enter email" required />
+        <input type="email" name="email" placeholder="Enter email"  />
         <input
           type="text"
           name="username"
-          placeholder="Enter username"
-          required
+          placeholder="Enter username"    
         />
         <input
           type="password"
           name="password"
-          placeholder="Enter password"
-          required
+          placeholder="Enter password" 
         />
         <input type="submit" value="Register" class="registration__btn" />
       </form>
     </main>
+
+    <!-- <section class="error"> -->
+      <!-- <h1 class="error__title">Errors occurred while registering: </h1>
+      <p class="error__item">Sample error 1</p>
+      <p class="error__item">Sample error 2</p> -->
+    <!-- </section> -->
+
+    <?php
+    check_and_print_register_errors();
+    ?>
   </body>
 </html>
