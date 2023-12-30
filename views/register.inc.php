@@ -9,6 +9,7 @@ function check_and_print_register_errors(){
         if(count($errors) > 0){
             echo "<section class='error'>";
             echo "<h1 class='error__title'>Errors occurred while registering: </h1>";
+            echo "<span class='error__close'>X</span>";
             foreach($errors as $error){
                 echo "<p class='error__item'>$error</p>";
             }

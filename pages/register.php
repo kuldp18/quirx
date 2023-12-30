@@ -40,14 +40,24 @@ require_once "../views/register.inc.php";
       </form>
     </main>
 
-    <!-- <section class="error"> -->
-      <!-- <h1 class="error__title">Errors occurred while registering: </h1>
+    <!-- <section class="error">
+      <h1 class="error__title">Errors occurred while registering: </h1>
+      <span class="error__close">X</span>
       <p class="error__item">Sample error 1</p>
-      <p class="error__item">Sample error 2</p> -->
-    <!-- </section> -->
+      <p class="error__item">Sample error 2</p>
+    </section> -->
 
     <?php
     check_and_print_register_errors();
     ?>
+
+    <script>
+      const closeBtn = document.querySelector(".error__close");
+      closeBtn.addEventListener("click", ()=>{
+        let parent = document.querySelector(".error");
+        parent.remove();
+      });
+
+    </script>
   </body>
 </html>
