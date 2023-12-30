@@ -20,22 +20,9 @@ require_once "../views/register.inc.php";
         <a href="./login.php" class="registration__link">here</a>.
       </h3>
       <form class="registration__form" method="post" action="../includes/register.inc.php">
-        <input
-          type="text"
-          name="fullname"
-          placeholder="Enter full name"
-        />
-        <input type="email" name="email" placeholder="Enter email"  />
-        <input
-          type="text"
-          name="username"
-          placeholder="Enter username"    
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Enter password" 
-        />
+        <?php
+          register_inputs();
+        ?>
         <input type="submit" value="Register" class="registration__btn" />
       </form>
     </main>

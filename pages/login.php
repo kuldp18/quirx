@@ -26,5 +26,11 @@
         <input type="submit" value="Login" class="login__btn" />
       </form>
     </main>
+
+    <?php
+      if(isset($_GET["signup"]) && $_GET["signup"] === "success"){
+        echo "<p style='color:white, font-size: 1.5rem'>Registration was successful!</p>";
+      }
+    ?>
   </body>
 </html>

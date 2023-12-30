@@ -42,9 +42,23 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
 
         if($errors){
             $_SESSION["errors_register"] = $errors;
+            $reg_data = [
+                "fullname" => $fullname,
+                "email" => $email,
+                "username" => $uname
+            ];
+            $_SESSION["reg_data"] = $reg_data;
+
             header('Location: ../pages/register.php');
             die();
         }
+
+        // register user
+        create_user($pdo, $fullname, $email, $uname, $pass);
+        header('Location: ../pages/login.php?signup=success');
+
+        $pdo = null;
+        $stmt = null;
 
 
     } catch (PDOException $e) {

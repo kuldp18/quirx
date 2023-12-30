@@ -25,8 +25,12 @@ function is_username_taken(object $pdo, string $username){
 }
 
 function is_email_registered(object $pdo, string $email){
-     if(get_email($pdo, $email)){
+    if(get_email($pdo, $email)){
         return true;
     }
     return false;
+}
+
+function create_user(object $pdo,string $fullname, string $email, string $username, string $password){
+    set_user($pdo, $fullname, $email, $username, $password);
 }
