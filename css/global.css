@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Afacad:wght@400;600;700&display=swap');
+
+/* RESET */
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+form,
+button,
+input {
+  font: inherit;
+}
+
+button,
+input[type='submit'] {
+  border: none;
+  outline: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* Utility */
+
+.subheading {
+  font-size: 1.3rem;
+  font-weight: lighter;
+  margin: 1rem 0;
+}
+
+/* General Styles */
+
+input {
+  padding: 0.2rem 0.5rem;
+  outline: none;
+}
+
+body {
+  background-color: rgba(0, 0, 0, 0.896);
+  color: whitesmoke;
+  font-family: 'Afacad', sans-serif;
+}
