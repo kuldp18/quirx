@@ -40,13 +40,7 @@ require_once "../views/register.inc.php";
   check_and_print_register_errors();
   ?>
 
-  <script>
-    const closeBtn = document.querySelector(".modal__close");
-    closeBtn.addEventListener("click", () => {
-      let parent = document.querySelector(".modal");
-      parent.remove();
-    });
-  </script>
+  <script src="../js/close_modal.js"></script>
 </body>
 
 </html>
