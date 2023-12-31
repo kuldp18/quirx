@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // set session variables
         $_SESSION["user_id"] = $result["id"];
         $_SESSION["user_username"] = htmlspecialchars($result["username"]);
-        $_SESSION["user_fullname"] = htmlspecialchars($result["fullname"]);
+        $_SESSION["user_fullname"] = htmlspecialchars($result["full_name"]);
         $_SESSION["last_regeneration"] = time();
 
         // redirect to home page
