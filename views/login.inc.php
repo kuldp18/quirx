@@ -19,3 +19,12 @@ function check_and_print_login_errors()
         }
     }
 }
+
+function output_username()
+{
+    if (isset($_SESSION["user_id"])) {
+        echo "<p class='home__username'>Logged in as: {$_SESSION["user_username"]}</p>";
+    } else {
+        echo "<p class='home__username'>Not logged in</p>";
+    }
+}

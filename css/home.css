@@ -20,6 +20,14 @@ body {
   font-size: 3.5rem;
 }
 
+.home__username {
+  font-size: 1.5rem;
+  background-color: black;
+  padding: 1rem;
+  border-radius: 10px;
+  border: 2px solid rgb(21, 128, 236);
+}
+
 .home__link {
   padding: 1rem 2rem;
   font-size: 2rem;
