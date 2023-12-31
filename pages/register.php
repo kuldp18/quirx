@@ -5,46 +5,48 @@ require_once "../views/register.inc.php";
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Quirx - Registration</title>
-    <link rel="stylesheet" href="../css/global.css" />
-    <link rel="stylesheet" href="../css/register.css" />
-  </head>
-  <body>
-    <main class="registration">
-      <h1 class="registration__title">Join Quirx today!</h1>
-      <h3 class="subheading">
-        Already an user? Login
-        <a href="./login.php" class="registration__link">here</a>.
-      </h3>
-      <form class="registration__form" method="post" action="../includes/register.inc.php">
-        <?php
-          register_inputs();
-        ?>
-        <input type="submit" value="Register" class="registration__btn" />
-      </form>
-    </main>
 
-    <!-- <section class="error">
-      <h1 class="error__title">Errors occurred while registering: </h1>
-      <span class="error__close">X</span>
-      <p class="error__item">Sample error 1</p>
-      <p class="error__item">Sample error 2</p>
-    </section> -->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quirx - Registration</title>
+  <link rel="stylesheet" href="../css/global.css" />
+  <link rel="stylesheet" href="../css/register.css" />
+</head>
 
-    <?php
-    check_and_print_register_errors();
-    ?>
+<body>
+  <main class="registration">
+    <h1 class="registration__title">Join Quirx today!</h1>
+    <h3 class="subheading">
+      Already an user? Login
+      <a href="./login.php" class="registration__link">here</a>.
+    </h3>
+    <form class="registration__form" method="post" action="../includes/register.inc.php">
+      <?php
+      register_inputs();
+      ?>
+      <input type="submit" value="Register" class="registration__btn" />
+    </form>
+  </main>
 
-    <script>
-      const closeBtn = document.querySelector(".error__close");
-      closeBtn.addEventListener("click", ()=>{
-        let parent = document.querySelector(".error");
-        parent.remove();
-      });
+  <!-- <section class="modal modal--error">
+    <h1 class="modal__title">Errors occurred while registering: </h1>
+    <span class="modal__close modal__close--error">X</span>
+    <p class="modal__item">Sample error 1</p>
+    <p class="modal__item">Sample error 2</p>
+  </section> -->
 
-    </script>
-  </body>
+  <?php
+  check_and_print_register_errors();
+  ?>
+
+  <script>
+    const closeBtn = document.querySelector(".modal__close");
+    closeBtn.addEventListener("click", () => {
+      let parent = document.querySelector(".modal");
+      parent.remove();
+    });
+  </script>
+</body>
+
 </html>

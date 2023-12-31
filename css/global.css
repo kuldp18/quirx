@@ -104,10 +104,10 @@ body {
   background-color: rgb(227, 36, 36);
 }
 
-.modal__close-error {
+.modal__close--error {
   color: red;
 }
-.modal__close-error:hover {
+.modal__close--error:hover {
   color: rgba(242, 14, 14, 0.925);
 }
 
@@ -117,9 +117,9 @@ body {
   background-color: rgb(46, 159, 54);
 }
 
-.modal__close-success {
+.modal__close--success {
   color: green;
 }
-.modal__close-success:hover {
+.modal__close--success:hover {
   color: rgba(0, 128, 0, 0.9);
 }

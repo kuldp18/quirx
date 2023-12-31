@@ -3,16 +3,17 @@
 
 declare(strict_types=1);
 
-function register_inputs(){
+function register_inputs()
+{
     // fullname
 
-    if(isset($_SESSION["reg_data"]["fullname"])){
+    if (isset($_SESSION["reg_data"]["fullname"])) {
         echo '<input
           type="text"
           name="fullname"
           placeholder="Enter full name"
-          value="'.$_SESSION["reg_data"]["fullname"].'"/>';
-    }else{
+          value="' . $_SESSION["reg_data"]["fullname"] . '"/>';
+    } else {
         echo '<input
           type="text"
           name="fullname"
@@ -20,13 +21,13 @@ function register_inputs(){
     }
 
     // email
-    if(isset($_SESSION["reg_data"]["email"]) && !isset($_SESSION["errors_register"]["email_taken"]) && isset($_SESSION["reg_data"]["email"]) && !isset($_SESSION["errors_register"]["invalid_email"])){
+    if (isset($_SESSION["reg_data"]["email"]) && !isset($_SESSION["errors_register"]["email_taken"]) && isset($_SESSION["reg_data"]["email"]) && !isset($_SESSION["errors_register"]["invalid_email"])) {
         echo ' <input
         type="email"
         name="email"
         placeholder="Enter email"
-        value="'.$_SESSION["reg_data"]["email"].'"/>';
-    }else{
+        value="' . $_SESSION["reg_data"]["email"] . '"/>';
+    } else {
         echo ' <input
         type="email"
         name="email"
@@ -35,20 +36,20 @@ function register_inputs(){
     }
 
     //username
-    if(isset($_SESSION["reg_data"]["username"]) && !isset($_SESSION["errors_register"]["username_taken"])){
+    if (isset($_SESSION["reg_data"]["username"]) && !isset($_SESSION["errors_register"]["username_taken"])) {
         echo ' <input
         type="text"
         name="username"
         placeholder="Enter username"
-        value="'.$_SESSION["reg_data"]["username"].'"/>';
-    }else{
+        value="' . $_SESSION["reg_data"]["username"] . '"/>';
+    } else {
         echo ' <input
         type="text"
         name="username"
         placeholder="Enter username"    
     />';
     }
-    
+
     // password
     echo '<input
         type="password"
@@ -57,19 +58,19 @@ function register_inputs(){
     />';
 }
 
-function check_and_print_register_errors(){
-    if(isset($_SESSION["errors_register"])){
+function check_and_print_register_errors()
+{
+    if (isset($_SESSION["errors_register"])) {
         $errors = $_SESSION["errors_register"];
-        if(count($errors) > 0){
-            echo "<section class='error'>";
-            echo "<h1 class='error__title'>Errors occurred while registering: </h1>";
-            echo "<span class='error__close'>X</span>";
-            foreach($errors as $error){
-                echo "<p class='error__item'>$error</p>";
+        if (count($errors) > 0) {
+            echo "<section class='modal modal--error'>";
+            echo "<h1 class='modal__title'>Errors occurred while registering: </h1>";
+            echo "<span class='modal__close modal__close--error'>X</span>";
+            foreach ($errors as $error) {
+                echo "<p class='modal__item'>$error</p>";
             }
             echo "</section>";
             unset($_SESSION["errors_register"]);
         }
-        
     }
 }
