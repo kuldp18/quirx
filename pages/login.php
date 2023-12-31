@@ -1,3 +1,9 @@
+<?php
+require_once "../includes/config_session.inc.php";
+require_once "../views/login.inc.php";
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,15 +22,16 @@
       New to Quirx? Register
       <a href="./register.php" class="login__link">here</a>.
     </h3>
-    <form class="login__form">
-      <input type="email" name="email" placeholder="Enter email" required />
-      <input type="password" name="password" placeholder="Enter password" required />
+    <form class="login__form" method="post" action="../includes/login.inc.php">
+      <input type="email" name="email" placeholder="Enter email" />
+      <input type="password" name="password" placeholder="Enter password" />
       <!-- TODO : ADD FORGOT PASSWORD FEATURE -->
       <input type="submit" value="Login" class="login__btn" />
     </form>
   </main>
 
   <?php
+
   if (isset($_GET["signup"]) && $_GET["signup"] === "success") {
     echo <<<HTML
           <section class="modal modal--success">
@@ -34,6 +41,12 @@
         HTML;
   }
   ?>
+
+  <?php
+  check_and_print_login_errors();
+
+  ?>
+
   <script src="../js/close_modal.js"></script>
 </body>
 

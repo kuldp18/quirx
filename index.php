@@ -16,6 +16,20 @@
     <a href="./pages/login.php" class="home__link">Login</a>
   </main>
 
+  <?php
+  if (isset($_GET["login"]) && $_GET["login"] === "success") {
+    echo <<<HTML
+          <section class="modal modal--success">
+            <h1 class="modal__title">Login successful!</h1>
+            <span class="modal__close modal__close--success">X</span>
+          </section>
+        HTML;
+  }
+  ?>
+
+
+  <script src="./js/close_modal.js"></script>
+
 </body>
 
 </html>
