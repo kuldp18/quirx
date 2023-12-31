@@ -25,15 +25,6 @@ input[type='submit'] {
 a {
   text-decoration: none;
 }
-
-/* Utility */
-
-.subheading {
-  font-size: 1.3rem;
-  font-weight: lighter;
-  margin: 1rem 0;
-}
-
 /* General Styles */
 
 input {
@@ -45,4 +36,90 @@ body {
   background-color: rgba(0, 0, 0, 0.896);
   color: whitesmoke;
   font-family: 'Afacad', sans-serif;
+}
+
+/* Utility */
+
+.subheading {
+  font-size: 1.3rem;
+  font-weight: lighter;
+  margin: 1rem 0;
+}
+
+/* Blocks */
+.modal {
+  background-color: rgba(0, 0, 0, 0.977);
+  color: whitesmoke;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  padding: 3rem 2rem;
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  border: 10px solid white;
+  box-shadow: 2px 2px 5px 3px rgba(0, 0, 0, 0.744);
+  z-index: 2;
+}
+
+/* Elements */
+
+.modal__title {
+  font-size: 2rem;
+}
+.modal__item {
+  font-size: 1.5rem;
+}
+
+.modal__close {
+  font-size: 1.5rem;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  background-color: whitesmoke;
+  color: black;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Helvetica, sans-serif;
+  font-weight: bold;
+  border-radius: 2px;
+}
+
+.modal__close:hover {
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.936);
+  background-color: rgba(245, 245, 245, 0.92);
+}
+
+/* Modifiers */
+
+/* error */
+.modal--error {
+  background-color: rgb(227, 36, 36);
+}
+
+.modal__close-error {
+  color: red;
+}
+.modal__close-error:hover {
+  color: rgba(242, 14, 14, 0.925);
+}
+
+/* success */
+
+.modal--success {
+  background-color: rgb(46, 159, 54);
+}
+
+.modal__close-success {
+  color: green;
+}
+.modal__close-success:hover {
+  color: rgba(0, 128, 0, 0.9);
 }
