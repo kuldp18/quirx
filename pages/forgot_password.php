@@ -1,5 +1,7 @@
 <?php
 require_once "../includes/config_session.inc.php";
+require_once "../views/forgot_pass.inc.php";
+
 ?>
 
 
@@ -33,6 +35,22 @@ require_once "../includes/config_session.inc.php";
             <input type="submit" value="Get reset link" class="forgot__btn" />
         </form>
     </main>
+
+    <?php
+
+    if (isset($_GET["reset"]) && $_GET["reset"] === "success") {
+        echo <<<HTML
+          <section class="modal modal--success">
+            <h1 class="modal__title">Password reset link has been sent to your registered email.</h1>
+            <span class="modal__close modal__close--success">X</span>
+          </section>
+        HTML;
+    }
+    ?>
+
+    <?php
+    check_and_print_forgot_password_errors();
+    ?>
 
 
     <script src="../js/close_modal.js"></script>
