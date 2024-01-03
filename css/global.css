@@ -16,6 +16,10 @@ input {
   font: inherit;
 }
 
+ul li {
+  list-style-type: none;
+}
+
 button,
 input[type='submit'] {
   border: none;

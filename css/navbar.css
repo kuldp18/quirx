@@ -1,0 +1,81 @@
+body {
+  position: relative;
+}
+
+.header {
+  /* border: 1px solid red; */
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  padding: 0.1rem 0.8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.95);
+  background-image: linear-gradient(
+    to right,
+    rgba(13, 12, 12, 0.879),
+    rgba(26, 26, 26, 0.831)
+  );
+}
+
+.nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.nav__left {
+  /* border: 1px solid green; */
+  font-size: 1.5rem;
+}
+
+.nav__right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav__list {
+  /* border: 1px solid yellow; */
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+}
+
+.nav__item {
+  font-size: 1.2rem;
+}
+
+.nav__link,
+.nav__link:visited {
+  color: white;
+  background-color: black;
+  border: 1px solid rgba(245, 245, 245, 0.731);
+  border-radius: 1px;
+  padding: 0.5rem 1rem;
+  display: inline-block;
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav__link:hover {
+  background-color: rgba(19, 19, 19, 0.909);
+}
+
+.nav__link--title {
+  border: none;
+  background: transparent;
+}
+.nav__link--title:hover {
+  background-color: transparent;
+}
+
+.nav__link--btn {
+  border: 1px solid rgba(245, 245, 245, 0.731) !important;
+  cursor: pointer;
+}
