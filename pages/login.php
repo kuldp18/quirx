@@ -28,6 +28,7 @@ require_once "../views/login.inc.php";
       <input type="email" name="email" placeholder="Enter email" />
       <input type="password" name="password" placeholder="Enter password" />
       <!-- TODO : ADD FORGOT PASSWORD FEATURE -->
+      <a href="./forgot_password.php" class="login__link login__form__link">Forgot password?</a>
       <input type="submit" value="Login" class="login__btn" />
     </form>
   </main>
@@ -46,7 +47,6 @@ require_once "../views/login.inc.php";
 
   <?php
   check_and_print_login_errors();
-
   ?>
 
   <script src="../js/close_modal.js"></script>

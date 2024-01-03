@@ -47,3 +47,9 @@
   cursor: pointer;
   background-color: rgba(22, 122, 235, 0.906);
 }
+
+.login__form__link {
+  font-size: 1.25rem;
+  letter-spacing: 1.2px;
+  font-weight: lighter;
+}
