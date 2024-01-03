@@ -13,9 +13,11 @@ require_once "../views/login.inc.php";
   <title>Quirx - Registration</title>
   <link rel="stylesheet" href="../css/global.css" />
   <link rel="stylesheet" href="../css/login.css" />
+  <link rel="stylesheet" href="../css/navbar.css" />
 </head>
 
 <body>
+  <?php include_once('../includes/components/navbar.inc.php') ?>
   <main class="login">
     <h1 class="login__title">Login to Quirx</h1>
     <h3 class="subheading">
