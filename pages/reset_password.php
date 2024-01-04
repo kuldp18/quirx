@@ -49,20 +49,14 @@ require_once "../views/reset_pass.inc.php";
         <form class="reset__form" method="post" action="../includes/reset_pass.inc.php">
             <input type="password" name="password" placeholder="Enter new password" />
             <input type="hidden" name="email" value='<?php echo $_GET['email']; ?>' />
+            <input type="hidden" name="token" value='<?php echo $_GET['token']; ?>' />
             <input type="submit" value="Reset password" class="reset__btn" />
         </form>
     </main>
 
     <?php
 
-    // if (isset($_GET["reset"]) && $_GET["reset"] === "success") {
-    //     echo <<<HTML
-    //       <section class="modal modal--success">
-    //         <h1 class="modal__title">Password reset link has been sent to your registered email.</h1>
-    //         <span class="modal__close modal__close--success">X</span>
-    //       </section>
-    //     HTML;
-    // }
+    check_and_print_reset_password_errors();
     ?>
 
 

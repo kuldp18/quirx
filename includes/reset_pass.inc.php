@@ -3,6 +3,7 @@
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $pass = $_POST['password'];
     $email = $_POST['email'];
+    $token = $_POST['token'];
 
     try {
         require_once "./db_handler.inc.php";
@@ -19,6 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($errors) {
             $_SESSION["errors_reset_password"] = $errors;
+            header('Location: ../pages/reset_password.php?email=' . $email . '&token=' . $token);
             die();
         }
 
