@@ -20,21 +20,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Check if email is invalid
-        if (is_email_invalid($email)) {
+        else if (is_email_invalid($email)) {
             $errors["invalid_email"] = "Please enter a valid email address";
         }
 
         // fetch user from database
         $result = get_user($pdo, $email);
 
-        // Check if email is wrong
-        if (is_email_wrong($result)) {
-            $errors["login_incorrect"] = "Email or password is incorrect";
+        if (!is_input_empty($email, $pass)) {
+
+
+            // Check if email is wrong
+            if (is_email_wrong($result)) {
+                $errors["login_incorrect"] = "Email or password is incorrect";
+            }
+            // check if email is right and password is wrong
+            if (!is_email_wrong($result) && is_password_wrong($pass, $result["password"])) {
+                $errors["login_incorrect"] = "Email or password is incorrect";
+            }
         }
-        // check if email is right and password is wrong
-        if (!is_email_wrong($result) && is_password_wrong($pass, $result["password"])) {
-            $errors["login_incorrect"] = "Email or password is incorrect";
-        }
+
 
         require_once "./config_session.inc.php";
 
