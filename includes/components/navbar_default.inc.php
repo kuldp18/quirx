@@ -9,6 +9,7 @@
             <ul class="nav__list">
                 <?php if (isset($_SESSION['user_id'])) { ?>
                     <li class="nav__item"><a href="./pages/user_profile.php" class="nav__link">Profile</a></li>
+                    <li class="nav__item"><a href="./pages/upload_video.php" class="nav__link">Upload</a></li>
                     <form action="./includes/logout.inc.php" method="post" class="nav__item">
                         <input type="submit" name="logout" value="Logout" class="nav__link nav__link--btn">
                     </form>
