@@ -42,6 +42,15 @@ require_once "../views/login.inc.php";
           </section>
         HTML;
   }
+
+  if (isset($_GET["reset"]) && $_GET["reset"] === "failed") {
+    echo <<<HTML
+          <section class="modal modal--error">
+            <h1 class="modal__title">Invalid or expired reset link!</h1>
+            <span class="modal__close modal__close--error">X</span>
+          </section>
+        HTML;
+  }
   ?>
 
   <?php
