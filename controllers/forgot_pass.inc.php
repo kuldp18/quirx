@@ -57,7 +57,9 @@ function send_reset_email($email, $reset_token)
 
         $mail->Body = "Dear user,<br><br>
         Click on the link below to reset your password:<br><br>
-        <a href='$reset_link'>Reset Password</a><br><br>Regards,<br>Quirx Support";
+        <a href='$reset_link'>Reset Password</a><br><br>
+        Please note that the link is valid only for today.<br><br>
+        Regards,<br>Quirx Support";
 
         $mail->send();
         return true;
