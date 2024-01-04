@@ -1,6 +1,6 @@
 /* Blocks */
 
-.login {
+.forgot {
   min-height: calc(100vh - 70px);
   padding: 2rem;
   display: flex;
@@ -12,12 +12,12 @@
 
 /* Elements */
 
-.login__title {
+.forgot__title {
   font-size: 3.5rem;
   text-align: center;
 }
 
-.login__form {
+.forgot__form {
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -25,16 +25,7 @@
   max-width: 70%;
 }
 
-.login__link,
-.login__link:visited {
-  color: rgb(37, 129, 235);
-}
-
-.login__link:hover {
-  color: rgba(37, 129, 235, 0.906);
-}
-
-.login__btn {
+.forgot__btn {
   display: inline-block;
   margin: 0 auto;
   padding: 0.5rem 1.8rem;
@@ -43,13 +34,7 @@
   color: white;
 }
 
-.login__btn:hover {
+.forgot__btn:hover {
   cursor: pointer;
   background-color: rgba(22, 122, 235, 0.906);
-}
-
-.login__form__link {
-  font-size: 1.25rem;
-  letter-spacing: 1.2px;
-  font-weight: lighter;
 }

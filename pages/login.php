@@ -27,7 +27,7 @@ require_once "../views/login.inc.php";
     <form class="login__form" method="post" action="../includes/login.inc.php">
       <input type="email" name="email" placeholder="Enter email" />
       <input type="password" name="password" placeholder="Enter password" />
-      <!-- TODO : ADD FORGOT PASSWORD FEATURE -->
+      <a href="./forgot_password.php" class="login__link login__form__link">Forgot password?</a>
       <input type="submit" value="Login" class="login__btn" />
     </form>
   </main>
@@ -42,11 +42,37 @@ require_once "../views/login.inc.php";
           </section>
         HTML;
   }
+
+  if (isset($_GET["reset"]) && $_GET["reset"] === "true") {
+    echo <<<HTML
+          <section class="modal modal--success">
+            <h1 class="modal__title">Your password has been reset successfully!</h1>
+            <span class="modal__close modal__close--success">X</span>
+          </section>
+        HTML;
+  }
+
+  if (isset($_GET["reset"]) && $_GET["reset"] === "invalid") {
+    echo <<<HTML
+          <section class="modal modal--error">
+            <h1 class="modal__title">Invalid or expired reset link!</h1>
+            <span class="modal__close modal__close--error">X</span>
+          </section>
+        HTML;
+  }
+
+  if (isset($_GET["reset"]) && $_GET["reset"] === "false") {
+    echo <<<HTML
+          <section class="modal modal--error">
+            <h1 class="modal__title">Error while resetting your password!</h1>
+            <span class="modal__close modal__close--error">X</span>
+          </section>
+        HTML;
+  }
   ?>
 
   <?php
   check_and_print_login_errors();
-
   ?>
 
   <script src="../js/close_modal.js"></script>
