@@ -2,7 +2,7 @@
 require_once "../includes/db_handler.inc.php";
 require_once "../includes/config_session.inc.php";
 require_once "../models/reset_pass.inc.php";
-
+require_once "../views/reset_pass.inc.php";
 ?>
 
 
@@ -37,7 +37,7 @@ require_once "../models/reset_pass.inc.php";
     $isVerified = verify_email_and_reset_token($pdo, $email, $token);
 
     if (!$isVerified) {
-        header("Location: ./login.php?reset=failed");
+        header("Location: ./login.php?reset=invalid");
         exit();
     }
     ?>
@@ -48,6 +48,7 @@ require_once "../models/reset_pass.inc.php";
         </h3>
         <form class="reset__form" method="post" action="../includes/reset_pass.inc.php">
             <input type="password" name="password" placeholder="Enter new password" />
+            <input type="hidden" name="email" value='<?php echo $_GET['email']; ?>' />
             <input type="submit" value="Reset password" class="reset__btn" />
         </form>
     </main>

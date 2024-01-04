@@ -43,10 +43,28 @@ require_once "../views/login.inc.php";
         HTML;
   }
 
-  if (isset($_GET["reset"]) && $_GET["reset"] === "failed") {
+  if (isset($_GET["reset"]) && $_GET["reset"] === "true") {
+    echo <<<HTML
+          <section class="modal modal--success">
+            <h1 class="modal__title">Your password has been reset successfully!</h1>
+            <span class="modal__close modal__close--success">X</span>
+          </section>
+        HTML;
+  }
+
+  if (isset($_GET["reset"]) && $_GET["reset"] === "invalid") {
     echo <<<HTML
           <section class="modal modal--error">
             <h1 class="modal__title">Invalid or expired reset link!</h1>
+            <span class="modal__close modal__close--error">X</span>
+          </section>
+        HTML;
+  }
+
+  if (isset($_GET["reset"]) && $_GET["reset"] === "false") {
+    echo <<<HTML
+          <section class="modal modal--error">
+            <h1 class="modal__title">Error while resetting your password!</h1>
             <span class="modal__close modal__close--error">X</span>
           </section>
         HTML;

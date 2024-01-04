@@ -26,3 +26,31 @@ function verify_email_and_reset_token(object $pdo, string $email, string $reset_
         return false;
     }
 }
+
+// set new password to db
+
+function set_new_password(object $pdo, string $email, string $new_password)
+{
+    // hash new password
+    $options = ['cost' => 12];
+    $hashed_password = password_hash($new_password, PASSWORD_BCRYPT, $options);
+
+    // set new password to db
+    $query = "UPDATE users SET password = :password WHERE email = :email";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":password", $hashed_password, PDO::PARAM_STR);
+    $stmt->bindParam(":email", $email, PDO::PARAM_STR);
+    $stmt->execute();
+    return true;
+}
+
+// empty reset token and reset token date if password is set
+
+function empty_reset_token(object $pdo, string $email)
+{
+    $query = "UPDATE users SET reset_token = NULL, reset_token_expiration = NULL WHERE email = :email";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":email", $email, PDO::PARAM_STR);
+    $stmt->execute();
+    return true;
+}
