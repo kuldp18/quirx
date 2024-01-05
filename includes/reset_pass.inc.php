@@ -12,8 +12,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $errors = [];
 
-        // check if email is empty
-        if (empty($pass)) {
+        // check if passwords are empty
+        if (empty($pass) || empty($repeat_pass)) {
             $errors["empty_input"] = "Please input your new password";
         }
 
