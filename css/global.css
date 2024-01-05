@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Afacad:wght@400;600;700&display=swap');
 
+/* Variables */
+
+:root {
+  --FORM_WIDTH: 40%;
+}
+
 /* RESET */
 
 *,
@@ -8,9 +14,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-:root {
-  --FORM_WIDTH: 40%;
 }
 
 form,
