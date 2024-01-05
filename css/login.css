@@ -22,7 +22,7 @@
   flex-direction: column;
   gap: 2rem;
   width: 100%;
-  max-width: 70%;
+  max-width: var(--FORM_WIDTH);
 }
 
 .login__link,
