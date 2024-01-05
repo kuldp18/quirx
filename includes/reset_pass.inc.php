@@ -2,6 +2,7 @@
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $pass = $_POST['password'];
+    $repeat_pass = $_POST['repeat_password'];
     $email = $_POST['email'];
     $token = $_POST['token'];
 
@@ -14,6 +15,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // check if email is empty
         if (empty($pass)) {
             $errors["empty_input"] = "Please input your new password";
+        }
+
+        // check if passwords donot match
+        if ($pass !== $repeat_pass) {
+            $errors["passwords_dont_match"] = "Passwords donot match";
         }
 
         require_once "./config_session.inc.php";

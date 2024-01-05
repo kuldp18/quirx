@@ -48,6 +48,7 @@ require_once "../views/reset_pass.inc.php";
         </h3>
         <form class="reset__form" method="post" action="../includes/reset_pass.inc.php">
             <input type="password" name="password" placeholder="Enter new password" />
+            <input type="password" name="repeat_password" placeholder="Enter new password again" />
             <input type="hidden" name="email" value='<?php echo $_GET['email']; ?>' />
             <input type="hidden" name="token" value='<?php echo $_GET['token']; ?>' />
             <input type="submit" value="Reset password" class="reset__btn" />
