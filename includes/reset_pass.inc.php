@@ -14,11 +14,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // check if passwords are empty
         if (empty($pass) || empty($repeat_pass)) {
-            $errors["empty_input"] = "Please input your new password";
+            $errors["empty_input"] = "Please input your new password in both fields";
         }
 
         // check if passwords donot match
-        if ($pass !== $repeat_pass) {
+        else if ($pass !== $repeat_pass) {
             $errors["passwords_dont_match"] = "Passwords donot match";
         }
 
