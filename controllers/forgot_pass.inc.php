@@ -2,6 +2,9 @@
 
 declare(strict_types=1);
 
+include_once "../includes/db_handler.inc.php";
+include_once "../models/forgot_pass.inc.php";
+
 //Load Composer's autoloader
 require '../vendor/autoload.php';
 
@@ -32,9 +35,20 @@ function is_email_wrong(bool|array $result)
 
 function send_reset_email($email, $reset_token)
 {
+    // use global $pdo object
+    global $pdo;
     $mail = new PHPMailer(true);
     $dotenv = Dotenv::createImmutable(__DIR__ . "/../");
     $dotenv->load();
+
+    // fetch user details
+    $details = get_user($pdo, $email);
+
+    if ($details) {
+        $user_name = $details['username'];
+    } else {
+        $user_name = "User";
+    }
 
     try {
         //Server settings
@@ -55,13 +69,14 @@ function send_reset_email($email, $reset_token)
         // generate reset link with token and email
         $reset_link = "http://localhost/quirx/pages/reset_password.php?email=" . $email . "&token=" . $reset_token;
 
-        $mail->Body = "Dear user,<br><br>
-        Click on the link below to reset your password:<br><br>
+        $mail->Body = "Dear $user_name,<br><br>
+        Click on the link below to reset your password:<br>
         <a href='$reset_link'>Reset Password</a><br><br>
         Please note that the link is valid only for today.<br><br>
         Regards,<br>Quirx Support";
 
         $mail->send();
+
         return true;
     } catch (Exception $e) {
         return false;
