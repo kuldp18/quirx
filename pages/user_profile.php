@@ -50,6 +50,10 @@ require_once "../includes/config_session.inc.php";
                     echo "email";
                 } ?>
             </p>
+
+            <?php if (isset($_SESSION['user_is_admin']) && $_SESSION['user_is_admin'] === 'Y') { ?>
+                <p>Role: Admin</p>
+            <?php } ?>
         </section>
         <a href="#" class="profile__btn">Edit Profile</a>
         <a href="#" class="profile__btn">Dashboard</a>
