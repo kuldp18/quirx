@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Afacad:wght@400;600;700&display=swap');
 
+/* Variables */
+
+:root {
+  --FORM_WIDTH: 40%;
+}
+
 /* RESET */
 
 *,
@@ -69,8 +75,8 @@ body {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  border: 10px solid white;
-  box-shadow: 2px 2px 5px 3px rgba(0, 0, 0, 0.744);
+  border: 8px solid white;
+  box-shadow: 5px 5px 5px 3px rgba(0, 0, 0, 0.744);
   z-index: 2;
 }
 
@@ -110,25 +116,45 @@ body {
 
 /* error */
 .modal--error {
-  background-color: rgb(227, 36, 36);
+  background: #ed213a; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to bottom,
+    #93291e,
+    #ed213a
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    #93291e,
+    #ed213a
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .modal__close--error {
-  color: red;
+  color: #b53021;
 }
 .modal__close--error:hover {
-  color: rgba(242, 14, 14, 0.925);
+  color: rgba(181, 48, 33, 0.847);
 }
 
 /* success */
 
 .modal--success {
-  background-color: rgb(46, 159, 54);
+  background: #52c234; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to bottom,
+    #184e04,
+    #52c234
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    #184e04,
+    #52c234
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .modal__close--success {
-  color: green;
+  color: rgb(58, 151, 32);
 }
 .modal__close--success:hover {
-  color: rgba(0, 128, 0, 0.9);
+  color: rgba(58, 151, 32, 0.852);
 }
