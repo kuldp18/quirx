@@ -7,6 +7,14 @@
         </div>
         <div class="nav__right">
             <ul class="nav__list">
+                <?php
+                // check if user is logged in and is admin
+                if (isset($_SESSION['user_id']) && isset($_SESSION['user_is_admin']) && $_SESSION['user_is_admin'] === 'Y') { ?>
+
+                    <li class="nav__item"><a href="./pages/admin_dashboard.php" class="nav__link">Admin</a></li>
+
+                <?php } ?>
+
                 <?php if (isset($_SESSION['user_id'])) { ?>
                     <li class="nav__item"><a href="./pages/user_profile.php" class="nav__link">Profile</a></li>
                     <form action="./includes/logout.inc.php" method="post" class="nav__item">
