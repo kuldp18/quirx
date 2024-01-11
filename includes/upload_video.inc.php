@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         require_once "./db_handler.inc.php";
-        // require_once "../models/register.inc.php";
+        require_once "../models/upload_video.inc.php";
         require_once "../controllers/upload_video.inc.php";
 
         // Error handlers
@@ -34,6 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Upload video
+        upload_video($pdo, $title, $description, $video, $thumbnail);
+        header('Location: ../index.php?upload=success');
         // close connection
         $pdo = null;
         $stmt = null;

@@ -41,6 +41,17 @@ require_once "./views/login.inc.php";
   }
   ?>
 
+  <?php
+  if (isset($_GET["upload"]) && $_GET["upload"] === "success") {
+    echo <<<HTML
+          <section class="modal modal--success">
+            <h1 class="modal__title">Video uploaded successfully!</h1>
+            <span class="modal__close modal__close--success">X</span>
+          </section>
+        HTML;
+  }
+  ?>
+
 
   <script src="./js/close_modal.js"></script>
 
