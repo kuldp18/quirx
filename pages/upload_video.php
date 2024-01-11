@@ -1,6 +1,7 @@
-<!-- <?php
-        require_once "../includes/config_session.inc.php";
-        ?> -->
+<?php
+require_once "../includes/config_session.inc.php";
+require_once "../views/upload_video.inc.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,7 +30,7 @@
     <main class="upload">
         <h2 class="upload__title">New video upload</h2>
         <section class="upload__section">
-            <form action="" class="upload__section__form" method="post" enctype="multipart/form-data">
+            <form action="../includes/upload_video.inc.php" class="upload__section__form" method="post" enctype="multipart/form-data">
                 <div class="upload__section__form__item upload__section__form__item--video">
                     <label>Choose video:</label>
                     <input type="file" name="video" class="upload__input">
@@ -53,9 +54,13 @@
         </section>
     </main>
 
+    <?php check_and_print_video_upload_errors() ?>
+
     <script>
         $('textarea').autoResize();
     </script>
+
+    <script src="../js/close_modal.js"></script>
 </body>
 
 </html>
