@@ -1,0 +1,108 @@
+.upload {
+  /* border: 1px solid red; */
+  min-height: calc(100vh - 70px);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+  padding-top: 2rem;
+}
+
+.upload__title {
+  font-size: 3rem;
+}
+
+.upload__section {
+  border: 4px solid whitesmoke;
+  width: 45%;
+  padding: 0rem 1rem;
+  display: grid;
+  place-items: center;
+  font-size: 1.5rem;
+  min-height: 500px;
+  background: #141e30; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #243b55,
+    #141e30
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #243b55,
+    #141e30
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.upload__section__form {
+  height: 100%;
+  width: 100%;
+  /* border: 1px solid yellow; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: 1rem;
+  position: relative;
+}
+.upload__section__form__item {
+  /* border: 1px solid purple; */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.upload__textarea,
+.upload__input {
+  min-width: 300px;
+  max-width: 100%;
+}
+.upload__textarea {
+  height: 40px;
+  font-size: 1rem;
+}
+
+input[type='file'] {
+  position: absolute;
+  right: 0;
+  width: 310px;
+}
+
+.upload__btn,
+input[type='file']::file-selector-button {
+  background-color: rgb(27, 135, 230);
+  color: whitesmoke;
+  border: none;
+  outline: none;
+  margin-right: 10px;
+  padding: 0.25rem 0.75rem;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+input[type='file']::file-selector-button {
+  font-size: 1.15rem;
+}
+
+.upload__btn {
+  display: inline-block;
+  margin: 0 auto;
+  width: 200px;
+  padding: 0.5rem 0.25rem;
+}
+
+.upload__title--sub {
+  text-align: center;
+  font-size: 2.75rem;
+}
+
+.upload__btn:hover,
+input[type='file']::file-selector-button:hover {
+  background-color: rgba(27, 135, 230, 0.92);
+}
+
+.upload__section__form__item:first-child {
+  padding: 0.75rem 0.5rem;
+  border: 1px solid whitesmoke;
+  background-color: rgba(0, 0, 0, 0.377);
+}
