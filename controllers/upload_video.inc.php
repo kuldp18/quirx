@@ -34,3 +34,26 @@ function is_video_file_invalid(array $video): bool
         return true;
     }
 }
+
+// check if thumbnail is not empty and is a valid image
+function is_thumbnail_file_invalid(array $thumbnail): bool
+{
+    $thumbnail_name = $thumbnail['name'];
+    $thumbnail_size = $thumbnail['size'];
+    $thumbnail_error = $thumbnail['error'];
+
+    $thumbnail_ext = explode('.', $thumbnail_name);
+    $thumbnail_actual_ext = strtolower(end($thumbnail_ext));
+
+    $allowed = ['jpg', 'jpeg', 'png'];
+
+    if (in_array($thumbnail_actual_ext, $allowed)) {
+        if ($thumbnail_error === 0 && $thumbnail_size > 0) {
+            return false;
+        } else {
+            return true;
+        }
+    } else {
+        return true;
+    }
+}

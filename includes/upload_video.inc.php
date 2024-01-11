@@ -7,6 +7,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $description = $_POST['description'];
     $thumbnail = $_FILES['thumbnail'];
 
+
+
     try {
         require_once "./db_handler.inc.php";
         require_once "../models/upload_video.inc.php";
@@ -24,7 +26,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         else if (is_video_file_invalid($video)) {
             $errors['invalid_video'] = 'Please upload a valid video in .mp4 format';
         }
-
+        // check if thumbnail array is not empty and is a valid image, if empty, ignore
+        else if (!empty($thumbnail['name']) && is_thumbnail_file_invalid($thumbnail)) {
+            $errors['invalid_thumbnail'] = 'Please upload a valid image in .jpg, .jpeg or .png format';
+        }
         require_once "./config_session.inc.php";
 
         if ($errors) {
