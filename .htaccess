@@ -1,2 +1,15 @@
 # Disable directory viewing
+
 Options -Indexes
+
+# Disable .env and .gitignore
+
+<Files .env>
+Order allow,deny
+Deny from all
+</Files>
+
+<Files .gitignore>
+Order allow,deny
+Deny from all
+</Files>
