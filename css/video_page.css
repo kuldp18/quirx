@@ -1,0 +1,71 @@
+/* Blocks */
+.player {
+  min-height: calc(100vh - 70px);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Elements */
+
+.player__video {
+  display: grid;
+  width: 100%;
+  height: 30vw;
+  grid-template-columns: 1fr;
+}
+
+.player__stats {
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid red; */
+  padding: 0.75rem 1.5rem;
+  gap: 1.25rem;
+  font-size: 1rem;
+}
+
+.player__stats__sub__left,
+.player__stats__ratings__left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.player__stats__sub,
+.player__stats__ratings {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.player__description {
+  padding: 1.5rem;
+  /* border: 1px solid red; */
+  background-color: rgb(16, 16, 16);
+  font-size: 1.25rem;
+  text-align: justify;
+}
+
+.video__title {
+  font-size: 2rem;
+}
+
+.user__name,
+.video__views,
+.ratings,
+.rate,
+.stars {
+  font-size: 1.3rem;
+}
+
+.user__name__link {
+  color: white;
+}
+
+.subscribe__btn {
+  padding: 0.25rem 1.25rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+/* Modifiers */
