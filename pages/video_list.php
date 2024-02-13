@@ -27,17 +27,19 @@
         <section class="videos__recent">
             <h2 class="videos__title">Recently uploaded</h2>
             <section class="video-list">
-                <article class="video">
-                    <div class="video__thumbnail">
-                        <!-- TODO: Figure out width and height attributes -->
-                        <!-- TODO: Add alt attribute -->
-                        <img src="#" alt="" class="video__thumbnail__img">
-                    </div>
-                    <div class="video__details">
-                        <h3 class="video__details__title">This is a sample video title that is very long and should be truncated after this</h3>
-                        <p class="video__details__user">User 1</p>
-                    </div>
-                </article>
+                <a href="./video_page.php" class="video__link">
+                    <article class="video">
+                        <div class="video__thumbnail">
+                            <!-- TODO: Figure out width and height attributes -->
+                            <!-- TODO: Add alt attribute -->
+                            <img src="#" alt="" class="video__thumbnail__img">
+                        </div>
+                        <div class="video__details">
+                            <h3 class="video__details__title">This is a sample video title that is very long and should be truncated after this</h3>
+                            <p class="video__details__user">User 1</p>
+                        </div>
+                    </article>
+                </a>
 
                 <article class="video">
                     <div class="video__thumbnail">

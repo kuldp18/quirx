@@ -74,6 +74,10 @@
   cursor: pointer;
 }
 
+.video__link {
+  color: whitesmoke;
+}
+
 .video__thumbnail {
   border-radius: inherit;
 }
