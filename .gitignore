@@ -1,2 +1,6 @@
 /vendor/
 .env
+*.mp4
+*.jpg
+*.jpeg
+*.png
