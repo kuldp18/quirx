@@ -26,6 +26,7 @@ require_once "./views/login.inc.php";
 
     output_username();
     ?>
+    <a href="./pages/video_list.php" style="color: white; font-size: 1.5rem">Video home page</a>
     <!-- <a href="./pages/register.php" class="home__link">Register</a>
     <a href="./pages/login.php" class="home__link">Login</a> -->
   </main>

@@ -4,6 +4,7 @@
 
 :root {
   --FORM_WIDTH: 40%;
+  --MAIN-BG-COLOR:background-color: rgba(0, 0, 0, 0.896);
 }
 
 /* RESET */
@@ -59,6 +60,10 @@ body {
   font-size: 1.3rem;
   font-weight: lighter;
   margin: 1rem 0;
+}
+
+.heading {
+  font-size: 3rem;
 }
 
 /* Blocks */
