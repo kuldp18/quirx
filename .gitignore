@@ -8,3 +8,8 @@
 # Except for .gitkeep files
 !/uploads/videos/.gitkeep
 !/uploads/thumbnails/.gitkeep
+
+*.mp4
+*.jpg
+*.jpeg
+*.png
