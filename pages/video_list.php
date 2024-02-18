@@ -134,53 +134,9 @@
         </section>
     </main>
 
-    <script>
-        // truncate each video title after certain characters
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js" integrity="sha512-wC/cunGGDjXSl9OHUH0RuqSyW4YNLlsPwhcLxwWW1CR4OeC2E1xpcdZz2DeQkEmums41laI+eGMw95IJ15SS3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-        function truncateVideoTitle(titleElement, maxLength) {
-            let truncatedText = titleElement.textContent.slice(0, maxLength) + '...';
-            titleElement.textContent = truncatedText;
-        }
-
-        const videoTitles = document.querySelectorAll('.video__details__title');
-        videoTitles.forEach(title => {
-            truncateVideoTitle(title, 70);
-        });
-
-        async function getRandomImage() {
-            try {
-                let response = await fetch("https://picsum.photos/1280/720");
-                if (response.ok) {
-                    let {
-                        url
-                    } = await response;
-                    return url;
-                } else {
-                    throw new Error('Failed to fetch image');
-                }
-            } catch (error) {
-                console.error('Error fetching image:', error);
-                return null;
-            }
-        }
-
-        async function setThumbnails() {
-            let thumbnails = document.querySelectorAll('.video__thumbnail__img');
-            thumbnails.forEach(async thumbnail => {
-                try {
-                    let image = await getRandomImage();
-                    if (image) {
-                        thumbnail.src = image;
-                    }
-                } catch (error) {
-                    console.error('Error setting thumbnail:', error);
-                }
-            });
-        }
-
-        // Call setThumbnails to set the thumbnails once the page is loaded
-        window.addEventListener('load', setThumbnails);
-    </script>
+    <script src="../js/video_list.js"></script>
 </body>
 
 </html>

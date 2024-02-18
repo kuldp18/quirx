@@ -72,6 +72,8 @@
   background-color: black;
   border-radius: 15px;
   cursor: pointer;
+  transform-style: preserve-3d;
+  transform: perspective(1000px);
 }
 
 .video__link {
@@ -80,6 +82,7 @@
 
 .video__thumbnail {
   border-radius: inherit;
+  transform: translateZ(10px);
 }
 .video__thumbnail__img {
   border-radius: inherit;
