@@ -43,6 +43,15 @@ require_once "../views/login.inc.php";
         HTML;
   }
 
+  if (isset($_GET["edit"]) && $_GET["edit"] === "success") {
+    echo <<<HTML
+          <section class="modal modal--success">
+            <h1 class="modal__title">Profile updated successfully! Please log in again.</h1>
+            <span class="modal__close modal__close--success">X</span>
+          </section>
+        HTML;
+  }
+
   if (isset($_GET["reset"]) && $_GET["reset"] === "true") {
     echo <<<HTML
           <section class="modal modal--success">

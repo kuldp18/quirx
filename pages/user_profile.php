@@ -55,7 +55,7 @@ require_once "../includes/config_session.inc.php";
                 <p>Role: Admin</p>
             <?php } ?>
         </section>
-        <a href="#" class="profile__btn">Edit Profile</a>
+        <a href="./edit_profile.php" class="profile__btn">Edit Profile</a>
         <a href="#" class="profile__btn">Dashboard</a>
     </main>
 </body>
