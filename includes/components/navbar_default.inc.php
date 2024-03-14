@@ -9,7 +9,7 @@
             <ul class="nav__list">
                 <?php
                 // check if user is logged in and is admin
-                if (isset($_SESSION['user_id']) && isset($_SESSION['user_is_admin']) && $_SESSION['user_is_admin'] === 'Y') { ?>
+                if (isset($_SESSION['user_id']) && isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') { ?>
 
                     <li class="nav__item"><a href="./pages/admin_dashboard.php" class="nav__link">Admin</a></li>
 

@@ -16,7 +16,7 @@ require_once "../includes/config_session.inc.php";
     <?php include_once('../includes/components/navbar.inc.php') ?>
     <?php
     // check is user is not logged in or is not admin
-    if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_is_admin']) || $_SESSION['user_is_admin'] !== 'Y') {
+    if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin') {
         // if not, redirect to home page
         header('Location: ../index.php');
         exit();

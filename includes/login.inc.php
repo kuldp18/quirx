@@ -51,15 +51,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // generate new session id and append user id to it
         $new_session_id = session_create_id();
-        $session_id = $new_session_id . "_" . $result["id"];
+        $session_id = $new_session_id . "_" . $result["user_id"];
         session_id($session_id); // set the new session id
 
         // set session variables
-        $_SESSION["user_id"] = $result["id"];
+        $_SESSION["user_id"] = $result["user_id"];
         $_SESSION["user_username"] = htmlspecialchars($result["username"]);
         $_SESSION["user_fullname"] = htmlspecialchars($result["full_name"]);
         $_SESSION["user_email"] = htmlspecialchars($result["email"]);
-        $_SESSION["user_is_admin"] = $result["is_admin"];
+        $_SESSION["user_role"] = $result["role"];
         $_SESSION["last_regeneration"] = time();
 
         // redirect to home page
