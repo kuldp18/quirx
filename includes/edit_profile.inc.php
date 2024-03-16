@@ -4,6 +4,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $new_email = $_POST['email'];
     $new_name = $_POST['name'];
     $new_username = $_POST['username'];
+    $new_pfp = $_FILES['pfp'];
 
     try {
         require_once "./db_handler.inc.php";
@@ -22,15 +23,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
         // Check for empty inputs
-        if (is_edit_form_empty($new_name, $new_email, $new_username)) {
+        if (is_edit_form_empty($new_name, $new_email, $new_username, $new_pfp)) {
             // make sure to use local variables here
-            $errors["empty_input"] = "Please fill in all fields";
+            $errors["empty_input"] = "Please fill at least one field to update your profile";
         } else {
-            // Check if atleast one field is different from the old one
+            // Check if at least one field is different from the old one
             if (!is_email_new($new_email, $current_user['email']) && !is_username_new($new_username, $current_user['username']) && !is_name_new($new_name, $current_user['full_name'])) {
                 $errors["no_changes"] = "No changes were made";
             }
-
 
             // Check if email is invalid
             else if (is_email_invalid($new_email) && !empty($new_email)) {
@@ -58,6 +58,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (empty($new_username)) {
             $new_username = $current_user['username'];
         }
+        if (empty($new_pfp)) {
+            $new_pfp = $current_user['pfp'];
+        }
 
 
 
@@ -69,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Update user details
-        update_user_details($pdo, $_SESSION['user_id'], $new_name, $new_email, $new_username);
+        update_user_details($pdo, $_SESSION['user_id'], $new_name, $new_email, $new_username, $new_pfp);
 
         // log out the user
         session_start();

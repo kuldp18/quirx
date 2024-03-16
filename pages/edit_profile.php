@@ -34,17 +34,19 @@ require_once "../views/edit_profile.inc.php";
             <span class="subheading">Enter values you want to update</span>
         </h1>
 
-        <form action="../includes/edit_profile.inc.php" class="profile__form" method="post">
+        <form action="../includes/edit_profile.inc.php" class="profile__form" method="post" enctype="multipart/form-data">
 
             <input type="text" name="name" placeholder="<?php
-                                                        echo $current_user['full_name'];
+                                                        echo "Name: " . $current_user['full_name'];
                                                         ?>">
             <input type=" email" name="email" placeholder="<?php
-                                                            echo $current_user['email'];
+                                                            echo "Email: " . $current_user['email'];
                                                             ?>">
             <input type="text" name="username" placeholder="<?php
-                                                            echo $current_user['username'];
+                                                            echo "Username: " . $current_user['username'];
                                                             ?>">
+            <label for="pfp" class="btn">Upload or change profile picture</label>
+            <input type="file" name="pfp">
             <button type="submit" class="profile__btn profile__btn--edit">Update</button>
         </form>
 

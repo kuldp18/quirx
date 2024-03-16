@@ -4,7 +4,9 @@
 # Ignore all files in uploads/videos and uploads/thumbnails
 /uploads/videos/*
 /uploads/thumbnails/*
+/uploads/pfp/*
 
 # Except for .gitkeep files
 !/uploads/videos/.gitkeep
 !/uploads/thumbnails/.gitkeep
+!/uploads/pfp/.gitkeep
