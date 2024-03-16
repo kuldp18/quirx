@@ -67,4 +67,17 @@ function upload_video(object $pdo, string $title, string $description, array $vi
 
     // execute the statement
     $stmt->execute();
+
+    // get the last inserted video id and initialize video_ratings table
+    $video_id = $pdo->lastInsertId();
+    init_video_ratings($pdo, $video_id);
+}
+
+// update video_ratings table
+function init_video_ratings(object $pdo, string $video_id)
+{
+    $query = "INSERT INTO video_ratings (video_id) VALUES (:video_id)";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":video_id", $video_id, PDO::PARAM_STR);
+    $stmt->execute();
 }
