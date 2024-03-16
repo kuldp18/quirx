@@ -60,6 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION["user_fullname"] = htmlspecialchars($result["full_name"]);
         $_SESSION["user_email"] = htmlspecialchars($result["email"]);
         $_SESSION["user_role"] = $result["role"];
+        $_SESSION["user_pfp"] = $result["pfp"];
         $_SESSION["last_regeneration"] = time();
 
         // redirect to home page

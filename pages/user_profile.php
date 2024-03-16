@@ -28,7 +28,19 @@ require_once "../includes/config_session.inc.php";
         <h1 class="profile__title">My Profile</h1>
         <section class="profile__hero">
             <div class="profile__hero__img">
-                <img src="../assets/default_pfp.svg" alt="User profile picture" width="200" height="200">
+                <img src="<?php
+                            if ($_SESSION["user_pfp"] === null) {
+                                echo "../assets/default_pfp.svg";
+                            } else {
+                                echo "../uploads/pfp/" . $_SESSION["user_pfp"];
+                            }
+                            ?>" alt="<?php
+                                        if ($_SESSION["user_pfp"] === null) {
+                                            echo "Default profile picture";
+                                        } else {
+                                            echo "Profile picture of " . $_SESSION["user_username"];
+                                        }
+                                        ?>" width="200" height="200">
             </div>
             <p class="profile__hero__fullname">
                 <?php if (isset($_SESSION['user_fullname'])) {
@@ -55,7 +67,7 @@ require_once "../includes/config_session.inc.php";
                 <p>Role: Admin</p>
             <?php } ?>
         </section>
-        <a href="#" class="profile__btn">Edit Profile</a>
+        <a href="./edit_profile.php" class="profile__btn">Edit Profile</a>
         <a href="#" class="profile__btn">Dashboard</a>
     </main>
 </body>

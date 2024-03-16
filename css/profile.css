@@ -9,19 +9,18 @@
   min-width: 450px;
   max-width: 600px;
   margin: 20px auto;
-  background: #0f2027; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to top,
-    #2c5364,
-    #203a43,
-    #0f2027
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to top,
-    #2c5364,
-    #203a43,
-    #0f2027
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #0f2027;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top,
+      #2c5364,
+      #203a43,
+      #0f2027);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top,
+      #2c5364,
+      #203a43,
+      #0f2027);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .profile__title {
@@ -68,7 +67,21 @@
   font-size: 1.25rem;
   border-radius: 5px;
 }
+
 .profile__btn:hover {
   background-color: whitesmoke;
   color: #0f2027;
+}
+
+.profile__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 75%;
+  font-size: 1.5rem;
+}
+
+.profile__btn--edit {
+  background-color: transparent;
+  cursor: pointer;
 }
