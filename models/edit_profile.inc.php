@@ -22,4 +22,16 @@ function update_user_details(object $pdo, int $user_id, string $new_name, string
     $stmt->bindParam(":new_username", $new_username, PDO::PARAM_STR);
     $stmt->bindParam(":user_id", $user_id, PDO::PARAM_INT);
     $stmt->execute();
+
+    // if successful, update updated_at in user to current timestamp
+    update_user_updated_at($pdo, $user_id);
+}
+
+// update updated_at in user to current timestamp
+function update_user_updated_at(object $pdo, int $user_id): void
+{
+    $query = "UPDATE users SET updated_at = CURRENT_TIMESTAMP WHERE user_id = :user_id";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":user_id", $user_id, PDO::PARAM_INT);
+    $stmt->execute();
 }
