@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = $_POST['title'];
     $description = $_POST['description'];
     $thumbnail = $_FILES['thumbnail'];
-
+    $video_tags = $_POST['video_tags'];
 
 
     try {
@@ -38,8 +38,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             die();
         }
 
+        // if video tags are empty, set to empty array
+        if (empty($video_tags)) {
+            $video_tags = [];
+        }
+
         // Upload video
-        upload_video($pdo, $title, $description, $video, $thumbnail);
+        upload_video($pdo, $title, $description, $video, $thumbnail, $video_tags);
         header('Location: ../index.php?upload=success');
         // close connection
         $pdo = null;
