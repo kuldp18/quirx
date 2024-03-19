@@ -1,5 +1,7 @@
 <?php
+require_once "../includes/db_handler.inc.php";
 require_once "../includes/config_session.inc.php";
+require_once "../models/upload_video.inc.php";
 require_once "../views/upload_video.inc.php";
 ?>
 <!DOCTYPE html>
@@ -26,6 +28,8 @@ require_once "../views/upload_video.inc.php";
         header('Location: ./login.php');
         exit();
     }
+
+    $tags = get_video_tags($pdo);
     ?>
     <main class="upload">
         <h2 class="upload__title">New video upload</h2>
@@ -49,6 +53,17 @@ require_once "../views/upload_video.inc.php";
                     <input type="file" name="thumbnail" class="upload__input">
                 </div>
                 <!-- TODO: ADD VIDEO TAG FEATURE -->
+                <div class="upload__section__form__item upload__section__form__item--tags">
+                    <label>Tags <small>(optional)</small>: </label> <br>
+                    <div class="video_tags">
+                        <?php foreach ($tags as $tag) { ?>
+                            <div class="video_tag">
+                                <label for="<?php echo $tag['tag_name']; ?>"><?php echo $tag['tag_name']; ?></label>
+                                <input type="checkbox" name="video_tags[]" value="<?php echo $tag['tag_id']; ?>" class="upload__input">
+                            </div>
+                        <?php } ?>
+                    </div>
+                </div>
                 <input type="submit" value="Upload video" class="upload__btn">
             </form>
         </section>

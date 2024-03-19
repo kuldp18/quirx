@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 // upload video to db
-function upload_video(object $pdo, string $title, string $description, array $video, array $thumbnail)
+function upload_video(object $pdo, string $title, string $description, array $video, array $thumbnail, array $video_tags)
 {
     // video is already checked for empty and invalid file
     $video_name = $video['name'];
@@ -71,6 +71,9 @@ function upload_video(object $pdo, string $title, string $description, array $vi
     // get the last inserted video id and initialize video_ratings table
     $video_id = $pdo->lastInsertId();
     init_video_ratings($pdo, $video_id);
+
+    // add tag associations
+    add_video_tags($pdo, $video_id, $video_tags);
 }
 
 // update video_ratings table
@@ -80,4 +83,26 @@ function init_video_ratings(object $pdo, string $video_id)
     $stmt = $pdo->prepare($query);
     $stmt->bindParam(":video_id", $video_id, PDO::PARAM_STR);
     $stmt->execute();
+}
+
+// get list of video tags from db
+function get_video_tags(object $pdo): array
+{
+    $query = "SELECT tag_id, tag_name FROM video_tags";
+    $stmt = $pdo->query($query);
+    $tags = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $tags;
+}
+
+// add video tags in video_tag_associations table
+function add_video_tags(object $pdo, string $video_id, array $video_tags)
+{
+    // video_tags contains all the tag ids
+    foreach ($video_tags as $tag_id) {
+        $query = "INSERT INTO video_tag_associations (video_id, tag_id) VALUES (:video_id, :tag_id)";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(":video_id", $video_id, PDO::PARAM_INT);
+        $stmt->bindParam(":tag_id", $tag_id, PDO::PARAM_INT);
+        $stmt->execute();
+    }
 }
