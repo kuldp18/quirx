@@ -1,5 +1,7 @@
 <?php
+require_once "./includes/db_handler.inc.php";
 require_once "./includes/config_session.inc.php";
+require_once "./models/videos.inc.php";
 require_once "./views/login.inc.php";
 ?>
 
@@ -11,24 +13,48 @@ require_once "./views/login.inc.php";
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Quirx - Home Page</title>
   <link rel="stylesheet" href="./css/global.css" />
-  <link rel="stylesheet" href="./css/home.css" />
+  <link rel="stylesheet" href="./css/video_list.css" />
   <link rel="stylesheet" href="./css/navbar.css" />
 </head>
 
 <body>
   <?php include_once('./includes/components/navbar_default.inc.php') ?>
-  <main class="home">
-    <h1 class="home__title">Welcome to Quirx!</h1>
-    <?php
-    require_once "./includes/config_session.inc.php";
 
-    include_once "./views/login.inc.php";
+  <?php
+  $videos = fetch_all_videos($pdo);
+  ?>
+  <main class="videos">
+    <section class="videos__search">
+      <form class="search_form">
+        <input type="text" name="search_form__input" class="search_form__input" placeholder="Search" required>
+        <button type="submit" class="search_form__submit">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </form>
+    </section>
+    <section class="videos__recent">
+      <h2 class="videos__title">Recently uploaded</h2>
+      <section class="video-list">
+        <?php foreach ($videos as $video) : ?>
+          <a href="./video_page.php?video_id=<?php echo $video['video_id']; ?>" class="video__link">
+            <article class="video">
+              <div class="video__thumbnail">
+                <?php
+                $thumbnail = $video['video_thumbnail'] ? "./uploads/thumbnails/" . $video['video_thumbnail'] : "https://placehold.co/1280x720/black/white?text=No+Thumbnail";
+                ?>
+                <img src="<?php echo $thumbnail; ?>" alt="No thumbnail found" class="video__thumbnail__img">
+              </div>
+              <div class="video__details">
+                <h3 class="video__details__title"><?php echo $video['video_title']; ?></h3>
+                <p class="video__details__user"><?php echo "@" . fetch_username_from_video_id($pdo, $video["video_id"]) ?></p>
+              </div>
+            </article>
+          </a>
+        <?php endforeach; ?>
 
-    output_username();
-    ?>
-    <a href="./pages/video_list.php" style="color: white; font-size: 1.5rem">Video home page</a>
-    <!-- <a href="./pages/register.php" class="home__link">Register</a>
-    <a href="./pages/login.php" class="home__link">Login</a> -->
+
+      </section>
+    </section>
   </main>
 
   <?php
@@ -55,6 +81,10 @@ require_once "./views/login.inc.php";
 
 
   <script src="./js/close_modal.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js" integrity="sha512-wC/cunGGDjXSl9OHUH0RuqSyW4YNLlsPwhcLxwWW1CR4OeC2E1xpcdZz2DeQkEmums41laI+eGMw95IJ15SS3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script src="./js/video_list.js"></script>
 
 </body>
 
