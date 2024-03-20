@@ -5,7 +5,7 @@ declare(strict_types=1);
 // fetch all videos from the database
 function fetch_all_videos(object $pdo): array
 {
-    $query = "SELECT * FROM videos";
+    $query = "SELECT * FROM videos ORDER BY created_at DESC";
     $stmt = $pdo->prepare($query);
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
