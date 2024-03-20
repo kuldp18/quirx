@@ -36,7 +36,7 @@ require_once "./views/login.inc.php";
       <h2 class="videos__title">Recently uploaded</h2>
       <section class="video-list">
         <?php foreach ($videos as $video) : ?>
-          <a href="./video_page.php?video_id=<?php echo $video['video_id']; ?>" class="video__link">
+          <a href="./pages/video_page.php?video_id=<?php echo $video['video_id']; ?>" class="video__link">
             <article class="video">
               <div class="video__thumbnail">
                 <?php
