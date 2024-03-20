@@ -43,7 +43,7 @@ require_once "./views/login.inc.php";
                 <?php
                 $thumbnail = $video['video_thumbnail'] ? "./uploads/thumbnails/" . $video['video_thumbnail'] : "https://placehold.co/1280x720/black/white?text=No+Thumbnail&font=monsterrat";
                 ?>
-                <img src="<?php echo $thumbnail; ?>" alt="No thumbnail found" class="video__thumbnail__img">
+                <img src="<?php echo $thumbnail; ?>" alt="No thumbnail found" class="video__thumbnail__img" width="300" height="200">
               </div>
               <div class="video__details">
                 <h3 class="video__details__title"><?php echo $video['video_title']; ?></h3>

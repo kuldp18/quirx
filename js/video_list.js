@@ -52,7 +52,6 @@ const options = {
   speed: 100,
   glare: true,
   "max-glare": 0.3,
-  scale: 1.02,
   transition: true,
   easing: "cubic-bezier(.03,.98,.52,.99)",
 };

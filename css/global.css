@@ -4,7 +4,7 @@
 
 :root {
   --FORM_WIDTH: 40%;
-  --MAIN-BG-COLOR:background-color: rgba(0, 0, 0, 0.896);
+  --MAIN-BG-COLOR: background-color: rgba(0, 0, 0, 0.896);
 }
 
 /* RESET */
@@ -36,6 +36,7 @@ input[type='submit'] {
 a {
   text-decoration: none;
 }
+
 /* General Styles */
 
 img {
@@ -90,6 +91,7 @@ body {
 .modal__title {
   font-size: 2rem;
 }
+
 .modal__item {
   font-size: 1.5rem;
 }
@@ -121,22 +123,22 @@ body {
 
 /* error */
 .modal--error {
-  background: #ed213a; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to bottom,
-    #93291e,
-    #ed213a
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to bottom,
-    #93291e,
-    #ed213a
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #ed213a;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom,
+      #93291e,
+      #ed213a);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom,
+      #93291e,
+      #ed213a);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .modal__close--error {
   color: #b53021;
 }
+
 .modal__close--error:hover {
   color: rgba(181, 48, 33, 0.847);
 }
@@ -144,22 +146,22 @@ body {
 /* success */
 
 .modal--success {
-  background: #52c234; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to bottom,
-    #184e04,
-    #52c234
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to bottom,
-    #184e04,
-    #52c234
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #52c234;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom,
+      #184e04,
+      #52c234);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom,
+      #184e04,
+      #52c234);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .modal__close--success {
   color: rgb(58, 151, 32);
 }
+
 .modal__close--success:hover {
   color: rgba(58, 151, 32, 0.852);
 }
