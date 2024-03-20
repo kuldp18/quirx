@@ -76,14 +76,19 @@
   transform: perspective(1000px);
 }
 
+.video:hover {
+  border: 3px solid rgb(45, 210, 201);
+}
+
 .video__link {
   color: whitesmoke;
 }
 
 .video__thumbnail {
   border-radius: inherit;
-  transform: translateZ(10px);
+  /* transform: translateZ(10px); */
 }
+
 .video__thumbnail__img {
   border-radius: inherit;
 }
@@ -124,6 +129,7 @@
     gap: 0.7rem;
   }
 }
+
 @media screen and (max-width: 730px) {
   .video-list {
     grid-template-columns: 1fr 1fr;
