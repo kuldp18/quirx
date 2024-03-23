@@ -1,0 +1,40 @@
+.tags {
+    /* border: 1px solid red; */
+    min-height: calc(100vh - 70px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.tags__section {
+    border: 1px solid rgb(211, 211, 16);
+    border-radius: 10px;
+}
+
+.tags__section__heading {
+    font-size: 2rem;
+}
+
+.tags__section,
+.tags__section form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.tags__btn {
+    padding: 0.2rem 1.25rem;
+    cursor: pointer;
+    background-color: black;
+    color: whitesmoke;
+}
+
+.tags__btn:hover {
+    background-color: rgba(0, 0, 0, 0.929);
+    color: rgba(245, 245, 245, 0.922);
+    outline: 1px solid rgba(0, 255, 255, 0.865);
+}
