@@ -24,6 +24,7 @@ require_once "../views/video_tags.inc.php";
         exit();
     }
     $user_name = $_SESSION['user_username'];
+
     ?>
 
     <main class="tags">
@@ -34,18 +35,49 @@ require_once "../views/video_tags.inc.php";
                 <button type="submit" class="tags__btn">Create</button>
             </form>
         </section>
-        <section class="tags__section"></section>
+        <section class="tags__section">
+            <h3 class="tags__section__heading">List video tags</h3>
+            <form action="../includes/get_tags.inc.php" method="post">
+                <button type="submit" class="tags__btn">List latest tags</button>
+            </form>
+            <?php if (isset($_SESSION['list_tags'])) : ?>
+                <table>
+                    <!-- three cols: tag_id, tag_name, updated_at -->
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Updated At</th>
+                    </tr>
+                    <?php foreach ($_SESSION['list_tags'] as $tag) : ?>
+                        <tr>
+                            <td><?php echo $tag['tag_id']; ?></td>
+                            <td><?php echo $tag['tag_name']; ?></td>
+                            <td><?php echo $tag['updated_at']; ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </table>
+            <?php endif; ?>
+        </section>
         <section class="tags__section"></section>
         <section class="tags__section"></section>
     </main>
 
     <?php
     check_and_print_video_tag_creation_errors();
+    check_and_print_video_tag_list_errors();
 
     if (isset($_GET["success"]) && $_GET["success"] === "tag_created") {
         echo <<<HTML
           <section class="modal modal--success">
             <h1 class="modal__title">New video tag created!</h1>
+            <span class="modal__close modal__close--success">X</span>
+          </section>
+        HTML;
+    }
+    if (isset($_GET["success"]) && $_GET["success"] === "tags_fetched") {
+        echo <<<HTML
+          <section class="modal modal--success">
+            <h1 class="modal__title">Latest tags fetched!</h1>
             <span class="modal__close modal__close--success">X</span>
           </section>
         HTML;

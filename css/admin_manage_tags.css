@@ -11,6 +11,7 @@
 .tags__section {
     border: 1px solid rgb(211, 211, 16);
     border-radius: 10px;
+    padding: 1rem 0;
 }
 
 .tags__section__heading {
@@ -26,6 +27,11 @@
     gap: 1rem;
 }
 
+.tags__section table {
+    width: 80%;
+    text-align: center;
+}
+
 .tags__btn {
     padding: 0.2rem 1.25rem;
     cursor: pointer;
@@ -36,5 +42,5 @@
 .tags__btn:hover {
     background-color: rgba(0, 0, 0, 0.929);
     color: rgba(245, 245, 245, 0.922);
-    outline: 1px solid rgba(0, 255, 255, 0.865);
+    outline: 1px solid rgba(10, 224, 224, 0.865);
 }
