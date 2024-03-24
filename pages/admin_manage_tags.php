@@ -66,13 +66,20 @@ require_once "../views/video_tags.inc.php";
                 <button type="submit" class="tags__btn">Update</button>
             </form>
         </section>
-        <section class="tags__section"></section>
+        <section class="tags__section">
+            <h3 class="tags__section__heading">Delete video tag</h3>
+            <form action="../includes/delete_tag.inc.php" method="post">
+                <input type="text" name="tag_id" placeholder="Enter tag id to delete">
+                <button type="submit" class="tags__btn">Delete</button>
+            </form>
+        </section>
     </main>
 
     <?php
     check_and_print_video_tag_creation_errors();
     check_and_print_video_tag_list_errors();
     check_and_print_video_tag_update_errors();
+    check_and_print_video_tag_deletion_errors();
 
     if (isset($_GET["success"]) && $_GET["success"] === "tag_created") {
         echo <<<HTML
@@ -94,6 +101,14 @@ require_once "../views/video_tags.inc.php";
         echo <<<HTML
           <section class="modal modal--success">
             <h1 class="modal__title">Tag was updated!</h1>
+            <span class="modal__close modal__close--success">X</span>
+          </section>
+        HTML;
+    }
+    if (isset($_GET["success"]) && $_GET["success"] === "tag_deleted") {
+        echo <<<HTML
+          <section class="modal modal--success">
+            <h1 class="modal__title">Tag was deleted!</h1>
             <span class="modal__close modal__close--success">X</span>
           </section>
         HTML;

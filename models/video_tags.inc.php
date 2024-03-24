@@ -32,3 +32,12 @@ function update_video_tag(object $pdo, string $tag_id, string $updated_tag): voi
     $stmt->bindParam(":updated_tag", $updated_tag, PDO::PARAM_STR);
     $stmt->execute();
 }
+
+// delete video tag
+function delete_video_tag(object $pdo, string $tag_id): void
+{
+    $query = "DELETE FROM video_tags WHERE tag_id = :tag_id";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":tag_id", $tag_id, PDO::PARAM_INT);
+    $stmt->execute();
+}
