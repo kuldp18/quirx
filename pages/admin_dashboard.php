@@ -10,6 +10,7 @@ require_once "../includes/config_session.inc.php";
     <title>Quirx - Admin Dashboard</title>
     <link rel="stylesheet" href="../css/global.css" />
     <link rel="stylesheet" href="../css/navbar.css" />
+    <link rel="stylesheet" href="../css/admin_dashboard.css" />
 </head>
 
 <body>
@@ -22,10 +23,19 @@ require_once "../includes/config_session.inc.php";
         exit();
     }
     $user_name = $_SESSION['user_username'];
-
-    // print user name if user is admin
-    echo '<h1>Dear ' . $user_name . ', you are an admin!</h1>';
     ?>
+
+    <main class="admin_dashboard">
+        <div class="dashboard_container">
+            <h1 class="heading">Admin Dashboard</h1>
+            <p class="subheading">Welcome, <?php echo $user_name; ?>!</p>
+        </div>
+        <h2 class="subheading subheading--bigger">Admin Actions</h2>
+        <section class="admin__actions">
+            <a href="./admin_manage_tags.php" class="admin__actions__link">Manage Video Tags</a>
+            <a href="#" class="admin__actions__link">Manage Users</a>
+        </section>
+    </main>
 
 </body>
 
