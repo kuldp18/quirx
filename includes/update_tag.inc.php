@@ -31,8 +31,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!empty($tag_id) && !empty($updated_tag)) {
             update_video_tag($pdo, $tag_id, $updated_tag);
             header('Location: ../pages/admin_manage_tags.php?success=tag_updated');
+        } else {
+
+            header('Location: ../pages/admin_manage_tags.php');
         }
-        header('Location: ../pages/admin_manage_tags.php');
 
         // close connection
         $pdo = null;
