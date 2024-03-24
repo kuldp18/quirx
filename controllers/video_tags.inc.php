@@ -27,3 +27,27 @@ function is_video_tag_exists(object $pdo, string $new_tag): bool
     }
     return false;
 }
+
+// check if video tag and video id are not empty
+function is_video_tag_and_id_empty(string $tag_id, string $updated_tag): bool
+{
+    if (empty($tag_id) || empty($updated_tag)) {
+        return true;
+    }
+    return false;
+}
+
+// check if the video tag id exists
+function is_video_tag_id_exists(object $pdo, string $tag_id): bool
+{
+    $query = "SELECT * FROM video_tags WHERE tag_id = :tag_id";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":tag_id", $tag_id, PDO::PARAM_INT);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($result) {
+        return true;
+    }
+    return false;
+}

@@ -21,3 +21,14 @@ function get_video_tags(object $pdo): array
     $tags = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $tags;
 }
+
+
+// update video tag
+function update_video_tag(object $pdo, string $tag_id, string $updated_tag): void
+{
+    $query = "UPDATE video_tags SET tag_name = :updated_tag, updated_at = CURRENT_TIMESTAMP WHERE tag_id = :tag_id";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":tag_id", $tag_id, PDO::PARAM_INT);
+    $stmt->bindParam(":updated_tag", $updated_tag, PDO::PARAM_STR);
+    $stmt->execute();
+}
