@@ -79,3 +79,42 @@ function fetch_video_views(object $pdo, int $video_id): int
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     return $result["video_views"];
 }
+
+// check if current user has viewed the video
+
+function has_user_viewed_video(object $pdo, int $video_id, int $user_id): bool
+{
+    $query = "SELECT * FROM user_video_stats WHERE video_id = :video_id AND user_id = :user_id";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":video_id", $video_id, PDO::PARAM_INT);
+    $stmt->bindParam(":user_id", $user_id, PDO::PARAM_INT);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($result === false) {
+        return false;
+    }
+
+    return true;
+}
+
+
+// increment video views
+function increment_video_views(object $pdo, int $video_id, int $user_id): void
+{
+    if ($user_id !== null) {
+        if (!has_user_viewed_video($pdo, $video_id, $user_id)) {
+            $query = "UPDATE video_ratings SET video_views = video_views + 1 WHERE video_id = :video_id";
+            $stmt = $pdo->prepare($query);
+            $stmt->bindParam(":video_id", $video_id, PDO::PARAM_INT);
+            $stmt->execute();
+
+            // Insert user_video_stats record to mark the video as viewed by the user
+            $query = "INSERT INTO user_video_stats (video_id, user_id) VALUES (:video_id, :user_id)";
+            $stmt = $pdo->prepare($query);
+            $stmt->bindParam(":video_id", $video_id, PDO::PARAM_INT);
+            $stmt->bindParam(":user_id", $user_id, PDO::PARAM_INT);
+            $stmt->execute();
+        }
+    }
+}
