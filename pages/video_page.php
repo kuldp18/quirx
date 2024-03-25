@@ -1,6 +1,7 @@
 <?php
 require_once "../includes/db_handler.inc.php";
 require_once "../includes/config_session.inc.php";
+require_once "../views/video_ratings.php";
 require_once "../models/videos.inc.php";
 ?>
 
@@ -30,6 +31,7 @@ require_once "../models/videos.inc.php";
     $video_views = fetch_video_views($pdo, $current_video_id);
 
     $current_user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
+    $creator_id = fetch_creator_id($pdo, $current_video_id);
 
     if ($current_user_id !== null) {
         increment_video_views($pdo, $current_video_id, $current_user_id);
@@ -55,7 +57,20 @@ require_once "../models/videos.inc.php";
                             <?php echo "@" . $username; ?>
                         </a>
                     </p>
-                    <button class="subscribe__btn">Subscribe</button>
+                    <form action="../includes/subscriptions.inc.php" method="post">
+                        <input type="hidden" name="video_id" value="<?php echo $current_video_id; ?>">
+                        <?php
+                        if ($current_user_id !== null) {
+
+                            $isSubscribed = is_user_subscribed_to_creator($pdo, $current_user_id, $creator_id);
+                            $buttonText = $isSubscribed ? "Unsubscribe" : "Subscribe";
+                        } else {
+                            $buttonText = "Subscribe";
+                        }
+                        ?>
+
+                        <button class="subscribe__btn" type="submit"><?php echo $buttonText; ?></button>
+                    </form>
                 </div>
                 <div class="player__stats__sub__right">
                     <p class="video__views">
@@ -86,9 +101,44 @@ require_once "../models/videos.inc.php";
 
     </main>
 
+    <?php
+    check_and_print_video_subscription_errors();
+
+    if (isset($_GET["success"]) && $_GET["success"] === "user_subscribed") {
+        echo <<<HTML
+          <section class="modal modal--success">
+            <h1 class="modal__title">User subscribed!</h1>
+            <span class="modal__close modal__close--success">X</span>
+          </section>
+        HTML;
+    }
+
+
+    if (isset($_GET["error"]) && $_GET["error"] === "self_subscribe") {
+        echo <<<HTML
+          <section class="modal modal--error">
+            <h1 class="modal__title">You can't subscribe yourself!</h1>
+            <span class="modal__close modal__close--error">X</span>
+          </section>
+        HTML;
+    }
+
+
+    if (isset($_GET["success"]) && $_GET["success"] === "user_unsubscribed") {
+        echo <<<HTML
+          <section class="modal modal--success">
+            <h1 class="modal__title">User unsubscribed!</h1>
+            <span class="modal__close modal__close--success">X</span>
+          </section>
+        HTML;
+    }
+
+    ?>
 
 
 
+
+    <script src="../js/close_modal.js"></script>
 
     <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
 </body>
