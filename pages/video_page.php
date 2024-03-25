@@ -23,8 +23,6 @@ require_once "../models/videos.inc.php";
 
     <?php
 
-
-
     $current_video_id = $_GET['video_id'];
     $video = fetch_video_by_id($pdo, $current_video_id);
     $username = fetch_username_from_video_id($pdo, $current_video_id);
@@ -36,6 +34,7 @@ require_once "../models/videos.inc.php";
     if ($current_user_id !== null) {
         increment_video_views($pdo, $current_video_id, $current_user_id);
     }
+
     ?>
     <main class="player">
         <video class="player__video video-js" controls preload="auto" width="650" height="300" poster="../uploads/thumbnails/<?php echo $video['video_thumbnail']; ?>" data-setup="{}">
