@@ -79,3 +79,107 @@ function fetch_video_views(object $pdo, int $video_id): int
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     return $result["video_views"];
 }
+
+// check if current user has viewed the video
+
+function has_user_viewed_video(object $pdo, int $video_id, int $user_id): bool
+{
+    $query = "SELECT * FROM user_video_stats WHERE video_id = :video_id AND user_id = :user_id";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":video_id", $video_id, PDO::PARAM_INT);
+    $stmt->bindParam(":user_id", $user_id, PDO::PARAM_INT);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($result === false) {
+        return false;
+    }
+
+    return true;
+}
+
+
+// increment video views
+function increment_video_views(object $pdo, int $video_id, int $user_id): void
+{
+    if ($user_id !== null) {
+        if (!has_user_viewed_video($pdo, $video_id, $user_id)) {
+            $query = "UPDATE video_ratings SET video_views = video_views + 1 WHERE video_id = :video_id";
+            $stmt = $pdo->prepare($query);
+            $stmt->bindParam(":video_id", $video_id, PDO::PARAM_INT);
+            $stmt->execute();
+
+            // Insert user_video_stats record to mark the video as viewed by the user
+            $query = "INSERT INTO user_video_stats (video_id, user_id) VALUES (:video_id, :user_id)";
+            $stmt = $pdo->prepare($query);
+            $stmt->bindParam(":video_id", $video_id, PDO::PARAM_INT);
+            $stmt->bindParam(":user_id", $user_id, PDO::PARAM_INT);
+            $stmt->execute();
+        }
+    }
+}
+
+// check if video exists
+function does_video_exist(object $pdo, string $video_id): bool
+{
+    $query = "SELECT * FROM videos WHERE video_id = :video_id";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":video_id", $video_id, PDO::PARAM_STR);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($result === false) {
+        return false;
+    }
+
+    return true;
+}
+
+// fetch creator id from video id
+function fetch_creator_id(object $pdo, int $video_id): int
+{
+    $query = "SELECT user_id FROM videos WHERE video_id = :video_id";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":video_id", $video_id, PDO::PARAM_INT);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result["user_id"];
+}
+
+
+// subcribe user to creator in user_subscriptions table: it takes user_id and creator_id
+function subscribe_user_to_creator(object $pdo, int $user_id, int $creator_id): void
+{
+    $query = "INSERT INTO user_subscriptions (user_id, creator_id) VALUES (:user_id, :creator_id)";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":user_id", $user_id, PDO::PARAM_INT);
+    $stmt->bindParam(":creator_id", $creator_id, PDO::PARAM_INT);
+    $stmt->execute();
+}
+
+// unsubscribe user from creator in user_subscriptions table: it takes user_id and creator_id
+function unsubscribe_user_from_creator(object $pdo, int $user_id, int $creator_id): void
+{
+    $query = "DELETE FROM user_subscriptions WHERE user_id = :user_id AND creator_id = :creator_id";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":user_id", $user_id, PDO::PARAM_INT);
+    $stmt->bindParam(":creator_id", $creator_id, PDO::PARAM_INT);
+    $stmt->execute();
+}
+
+// check if user is already subscribed to creator
+function is_user_subscribed_to_creator(object $pdo, int $user_id, int $creator_id): bool
+{
+    $query = "SELECT * FROM user_subscriptions WHERE user_id = :user_id AND creator_id = :creator_id";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":user_id", $user_id, PDO::PARAM_INT);
+    $stmt->bindParam(":creator_id", $creator_id, PDO::PARAM_INT);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($result === false) {
+        return false;
+    }
+
+    return true;
+}
