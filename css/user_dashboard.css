@@ -1,0 +1,54 @@
+.user_dashboard {
+    border: 1px solid red;
+    min-height: calc(100vh - 70px);
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1.5rem;
+    align-items: center;
+}
+
+.upload {
+    width: 90%;
+}
+
+.upload__videos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    border: 1px solid yellow;
+    width: 100%;
+}
+
+.video {
+    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem;
+}
+
+.btn__form {
+    display: flex;
+    gap: 1rem;
+}
+
+.video__btn {
+    width: 30px;
+    height: 30px;
+    padding: 0.5rem;
+    background-color: rgb(27, 144, 148);
+    color: whitesmoke;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.video__btn:hover {
+    opacity: 0.8;
+}
+
+.video__views,
+.video__ratings {
+    font-size: 1.25rem;
+}
