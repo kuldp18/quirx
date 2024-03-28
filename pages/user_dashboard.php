@@ -37,42 +37,48 @@ require_once "../models/videos.inc.php";
         <h1 class="heading">Your Dashboard</h1>
         <section class="upload">
             <h2 class="subheading subheading--larger">Your uploads</h2>
-            <section class="upload__videos">
-                <?php foreach ($uploads as $video) { ?>
-                    <article class="video">
-                        <div class="video__thumbnail video__item">
-                            <?php
-                            $thumbnail = $video['video_thumbnail'] ? "../uploads/thumbnails/" . $video['video_thumbnail'] : "https://placehold.co/1280x720/black/white?text=No+Thumbnail&font=monsterrat";
-                            ?>
-                            <img src="<?php echo $thumbnail; ?>" alt="No thumbnail found" class="video__thumbnail__img" width="300" height="200">
-                        </div>
-                        <div class="video__info video__item">
-                            <div class="video__title">
-                                Title: <?php echo $video['video_title']; ?>
+            <?php if (count($uploads) > 0) { ?>
+                <section class="upload__videos">
+                    <?php foreach ($uploads as $video) { ?>
+                        <article class="video">
+                            <div class="video__thumbnail video__item">
+                                <?php
+                                $thumbnail = $video['video_thumbnail'] ? "../uploads/thumbnails/" . $video['video_thumbnail'] : "https://placehold.co/1280x720/black/white?text=No+Thumbnail&font=monsterrat";
+                                ?>
+                                <img src="<?php echo $thumbnail; ?>" alt="No thumbnail found" class="video__thumbnail__img" width="300" height="200">
                             </div>
-                            <?php
-                            $video_id = $video['video_id'];
-                            $views = fetch_video_views($pdo, $video_id);
-                            $average_rating = fetch_average_rating($pdo, $video_id);
-                            ?>
-                            <div class="video__ratings">
-                                Rating: <?php echo $average_rating; ?>
+                            <div class="video__info video__item">
+                                <div class="video__title">
+                                    Title: <?php echo $video['video_title']; ?>
+                                </div>
+                                <?php
+                                $video_id = $video['video_id'];
+                                $views = fetch_video_views($pdo, $video_id);
+                                $average_rating = fetch_average_rating($pdo, $video_id);
+                                ?>
+                                <div class="video__ratings">
+                                    Rating: <?php echo $average_rating; ?>
+                                </div>
+                                <div class="video__views">
+                                    Views: <?php echo $views; ?>
+                                </div>
                             </div>
-                            <div class="video__views">
-                                Views: <?php echo $views; ?>
-                            </div>
-                        </div>
-                        <form action="" class="btn__form video__item">
-                            <button type="submit" name="edit" class="video__btn video__btn--edit">
-                                <i class="fa-solid fa-pen"></i>
-                            </button>
-                            <button type="submit" name="delete" class="video__btn video__btn--delete">
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
-                        </form>
-                    </article>
-                <?php } ?>
-            </section>
+                            <form action="" class="btn__form video__item">
+                                <button type="submit" name="edit" class="video__btn video__btn--edit">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+                                <button type="submit" name="delete" class="video__btn video__btn--delete">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </form>
+                        </article>
+                    <?php } ?>
+                </section>
+            <?php } else { ?>
+                <section class="no-videos">
+                    <p class="subheading">No videos found.</p>
+                </section>
+            <?php } ?>
         </section>
     </main>
 
