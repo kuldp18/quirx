@@ -1,5 +1,5 @@
 .user_dashboard {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     min-height: calc(100vh - 70px);
     display: flex;
     flex-direction: column;
@@ -13,22 +13,28 @@
 
 .upload__videos {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 2rem;
-    border: 1px solid yellow;
+    /* border: 1px solid yellow; */
     width: 100%;
 }
 
 .video {
-    border: 1px solid red;
+    border: 2px solid whitesmoke;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    padding: 1rem;
+    padding: 0.5rem;
+    min-height: 400px;
+}
+
+.video__item {
+    flex-grow: 1;
 }
 
 .btn__form {
     display: flex;
+    align-items: center;
     gap: 1rem;
 }
 
@@ -49,6 +55,21 @@
 }
 
 .video__views,
-.video__ratings {
+.video__ratings,
+.video__title {
     font-size: 1.25rem;
+}
+
+.video__title {
+    line-height: 1.35rem;
+}
+
+.subheading--larger {
+    font-size: 2rem;
+}
+
+.video__thumbnail__img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
 }

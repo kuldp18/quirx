@@ -183,3 +183,14 @@ function is_user_subscribed_to_creator(object $pdo, int $user_id, int $creator_i
 
     return true;
 }
+
+// fetch uploaded videos using user id
+function fetch_uploaded_videos(object $pdo, int $user_id): array
+{
+    $query = "SELECT * FROM videos WHERE user_id = :user_id ORDER BY created_at DESC";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":user_id", $user_id, PDO::PARAM_INT);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+}
