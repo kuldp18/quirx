@@ -63,14 +63,17 @@ require_once "../models/videos.inc.php";
                                     Views: <?php echo $views; ?>
                                 </div>
                             </div>
-                            <form action="" class="btn__form video__item">
-                                <button type="submit" name="edit" class="video__btn video__btn--edit">
+                            <div class="btn__form video__item">
+                                <a href="<?php echo './edit_video.php?video_id=' . $video_id ?>" name="edit" class="video__btn video__btn--edit">
                                     <i class="fa-solid fa-pen"></i>
-                                </button>
-                                <button type="submit" name="delete" class="video__btn video__btn--delete">
-                                    <i class="fa-solid fa-trash"></i>
-                                </button>
-                            </form>
+                                </a>
+                                <form action="" method="post">
+                                    <input type="hidden" name="video_id" value="<?php echo $video_id ?>">
+                                    <button type="submit" class="video__btn video__btn--delete">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
                         </article>
                     <?php } ?>
                 </section>
