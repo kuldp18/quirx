@@ -16,47 +16,31 @@ session_set_cookie_params([
 //Start session
 session_start();
 
-
-//Regenerate session ID every 30 minutes for security
-
 // check if user is logged in
 if (isset($_SESSION['user_id'])) {
-    if (!isset($_SESSION["last_regeneration"])) {
-        // no last regeneration time exists, so regenerate session ID
-        regen_session_id_logged_in();
+    if (!isset($_SESSION["last_activity"])) {
+        // no last activity time exists, so set it to current time
+        $_SESSION["last_activity"] = time();
     } else {
         // wait 30 minutes before regenerating session ID
         $interval = 60 * 30; // 30 minutes
-        if (time() - $_SESSION["last_regeneration"] >= $interval) {
-            regen_session_id_logged_in();
+        if (time() - $_SESSION["last_activity"] >= $interval) {
+            // user has been inactive for 30 minutes, so regenerate session ID
+            session_regenerate_id(true);
         }
     }
 } else {
     if (!isset($_SESSION["last_regeneration"])) {
         // no last regeneration time exists, so regenerate session ID
-        regen_session_id();
+        session_regenerate_id(true);
     } else {
         // wait 30 minutes before regenerating session ID
         $interval = 60 * 30; // 30 minutes
         if (time() - $_SESSION["last_regeneration"] >= $interval) {
-            regen_session_id();
+            session_regenerate_id(true);
         }
     }
 }
 
-
-
-function regen_session_id_logged_in()
-{
-    session_regenerate_id(true);
-    $new_session_id = session_create_id();
-    $session_id = $new_session_id . "_" . $_SESSION["user_id"];
-    session_id($session_id); // set the new session id
-    $_SESSION["last_regeneration"] = time();
-}
-
-function regen_session_id()
-{
-    session_regenerate_id(true);
-    $_SESSION["last_regeneration"] = time();
-}
+// update last activity time every time user performs an action
+$_SESSION["last_activity"] = time();
