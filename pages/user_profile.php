@@ -68,7 +68,7 @@ require_once "../includes/config_session.inc.php";
             <?php } ?>
         </section>
         <a href="./edit_profile.php" class="profile__btn">Edit Profile</a>
-        <a href="#" class="profile__btn">Dashboard</a>
+        <a href="./user_dashboard.php" class="profile__btn">Dashboard</a>
     </main>
 </body>
 

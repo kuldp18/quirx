@@ -41,3 +41,14 @@ function delete_video_tag(object $pdo, string $tag_id): void
     $stmt->bindParam(":tag_id", $tag_id, PDO::PARAM_INT);
     $stmt->execute();
 }
+
+// get video tags of a video by video_id
+function get_video_tags_by_video_id(object $pdo, string $video_id): array
+{
+    $query = "SELECT tag_name FROM video_tags WHERE tag_id IN (SELECT tag_id FROM video_tag_associations WHERE video_id = :video_id)";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":video_id", $video_id, PDO::PARAM_STR);
+    $stmt->execute();
+    $tags = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $tags;
+}

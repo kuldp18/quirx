@@ -1,0 +1,75 @@
+.user_dashboard {
+    /* border: 1px solid red; */
+    min-height: calc(100vh - 70px);
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1.5rem;
+    align-items: center;
+}
+
+.upload {
+    width: 90%;
+}
+
+.upload__videos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    /* border: 1px solid yellow; */
+    width: 100%;
+}
+
+.video {
+    border: 2px solid whitesmoke;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    min-height: 400px;
+}
+
+.video__item {
+    flex-grow: 1;
+}
+
+.btn__form {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.video__btn {
+    width: 30px;
+    height: 30px;
+    padding: 0.5rem;
+    background-color: rgb(27, 144, 148);
+    color: whitesmoke;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.video__btn:hover {
+    opacity: 0.8;
+}
+
+.video__views,
+.video__ratings,
+.video__title {
+    font-size: 1.25rem;
+}
+
+.video__title {
+    line-height: 1.35rem;
+}
+
+.subheading--larger {
+    font-size: 2rem;
+}
+
+.video__thumbnail__img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
