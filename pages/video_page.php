@@ -82,7 +82,13 @@ require_once "../models/videos.inc.php";
             <div class="player__stats__ratings">
                 <div class="player__stats__ratings__left">
                     <p class="rate">Rate this video: </p>
-                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <div id="stars">
+                        <span class="star" data-rating="1"><i class="far fa-star"></i></span>
+                        <span class="star" data-rating="2"><i class="far fa-star"></i></span>
+                        <span class="star" data-rating="3"><i class="far fa-star"></i></span>
+                        <span class="star" data-rating="4"><i class="far fa-star"></i></span>
+                        <span class="star" data-rating="5"><i class="far fa-star"></i></span>
+                    </div>
                 </div>
                 <div class="player__stats__ratings__right">
                     <p class="ratings">
@@ -139,6 +145,7 @@ require_once "../models/videos.inc.php";
 
 
     <script src="../js/close_modal.js"></script>
+    <script src="../js/star_rating.js"></script>
 
     <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
 </body>
