@@ -39,6 +39,9 @@ require_once "../models/videos.inc.php";
 
     ?>
     <main class="player">
+        <span class="video__id__span">
+            <?php echo $current_video_id; ?>
+        </span>
         <video class="player__video video-js" controls preload="auto" width="650" height="300" poster="../uploads/thumbnails/<?php echo $video['video_thumbnail']; ?>" data-setup="{}">
             <source src="../uploads/videos/<?php echo $video['video_path']; ?>" type="video/mp4" />
             <p class="vjs-no-js">
@@ -92,7 +95,7 @@ require_once "../models/videos.inc.php";
                 </div>
                 <div class="player__stats__ratings__right">
                     <p class="ratings">
-                        Rating: <span class="average__rating"><?php echo $average_rating; ?></span>
+                        Avg Rating: <span class="average__rating"><?php echo $average_rating; ?></span>
                     </p>
                 </div>
             </div>
@@ -109,6 +112,8 @@ require_once "../models/videos.inc.php";
 
     <?php
     check_and_print_video_subscription_errors();
+
+    check_and_print_star_rating_errors();
 
     if (isset($_GET["success"]) && $_GET["success"] === "user_subscribed") {
         echo <<<HTML

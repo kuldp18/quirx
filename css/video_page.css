@@ -84,4 +84,8 @@
   color: rgba(243, 211, 28, 0.966);
 }
 
+.video__id__span {
+  display: none;
+}
+
 /* Modifiers */

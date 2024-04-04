@@ -1,5 +1,7 @@
 const stars = document.querySelectorAll(".far.fa-star");
 
+const videoId = document.querySelector(".video__id__span").innerText.trim();
+
 let clickedStarIndex = -1; // global variable to keep track of clicked star
 
 function hoverStar() {
@@ -13,6 +15,11 @@ function hoverStar() {
     star.addEventListener("click", () => {
       clickedStarIndex = index;
       updateStars(clickedStarIndex, "click");
+
+      let rating = clickedStarIndex + 1;
+      console.log("rating: ", rating);
+      console.log("videoId: ", videoId);
+      ratingAjax(rating, videoId);
     });
   });
 }
@@ -32,3 +39,13 @@ function updateStars(starIndex, eventType) {
 }
 
 hoverStar();
+
+function ratingAjax(rating, video_id) {
+  fetch("../includes/star_rating.inc.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ rating, video_id: video_id }),
+  });
+}

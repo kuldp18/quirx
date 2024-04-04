@@ -194,3 +194,14 @@ function fetch_uploaded_videos(object $pdo, int $user_id): array
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $result;
 }
+
+// submit star rating
+function submit_star_rating(object $pdo, int $video_id, string $rating): void
+{
+    // ratings_count should be incremented, and ratings_sum should be incremented by the rating
+    $query = "UPDATE video_ratings SET ratings_count = ratings_count + 1, ratings_sum = ratings_sum + :rating, updated_at = CURRENT_TIMESTAMP WHERE video_id = :video_id";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":rating", $rating, PDO::PARAM_STR);
+    $stmt->bindParam(":video_id", $video_id, PDO::PARAM_INT);
+    $stmt->execute();
+}
