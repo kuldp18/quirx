@@ -35,14 +35,12 @@ require_once "../models/video_tags.inc.php";
     $video_tag_list = get_video_tags($pdo);
     $current_video_tags = get_video_tags_by_video_id($pdo, $video_id);
 
-    //print current video tags
-    print_r($current_video_tags);
 
     ?>
 
     <main class="edit">
         <h1 class="heading heading--small">Edit Video</h1>
-        <form action="" class="edit__form">
+        <form class="edit__form" method="post">
             <input type="text" name="title" class="edit__form__input" placeholder="Edit video title" value="<?php
                                                                                                             if (isset($video_details['video_title'])) {
                                                                                                                 echo $video_details['video_title'];
