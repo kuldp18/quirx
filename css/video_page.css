@@ -88,4 +88,8 @@
   display: none;
 }
 
+.previous__rating {
+  font-size: 1.2rem;
+}
+
 /* Modifiers */

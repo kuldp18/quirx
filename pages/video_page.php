@@ -39,6 +39,12 @@ require_once "../models/videos.inc.php";
 
     // round average rating to 1 decimal place
     $average_rating = round($average_rating, 1);
+    $previous_rating = 0;
+
+    // if user rated the video already, fetch previous rating
+    if (is_video_rated_by_user($pdo, $current_video_id, $current_user_id)) {
+        $previous_rating = fetch_previous_rating_value($pdo, $current_video_id, $current_user_id);
+    }
 
     ?>
     <main class="player">
@@ -95,6 +101,12 @@ require_once "../models/videos.inc.php";
                         <span class="star" data-rating="4"><i class="far fa-star"></i></span>
                         <span class="star" data-rating="5"><i class="far fa-star"></i></span>
                     </div>
+                    <!-- if previous_rating is not 0 show it below -->
+                    <?php if ($previous_rating !== 0) : ?>
+                        <p class="previous__rating">
+                            Your rating: <span class="previous__rating__value"><?php echo $previous_rating; ?></span>
+                        </p>
+                    <?php endif; ?>
                 </div>
                 <div class="player__stats__ratings__right">
                     <p class="ratings">
