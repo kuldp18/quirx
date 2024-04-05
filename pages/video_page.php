@@ -150,7 +150,19 @@ require_once "../models/videos.inc.php";
 
 
     <script src="../js/close_modal.js"></script>
-    <script src="../js/star_rating.js"></script>
+    <?php if (isset($current_user_id)) : ?>
+        <script src="../js/star_rating.js"></script>
+    <?php endif; ?>
+
+    <?php if (!isset($current_user_id)) : ?>
+        <script>
+            const stars = document.querySelectorAll(".star i");
+            stars.forEach(star => {
+                star.style.cursor = "not-allowed";
+            });
+        </script>
+    <?php endif; ?>
+
 
     <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
 </body>
