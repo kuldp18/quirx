@@ -37,6 +37,9 @@ require_once "../models/videos.inc.php";
         increment_video_views($pdo, $current_video_id, $current_user_id);
     }
 
+    // round average rating to 1 decimal place
+    $average_rating = round($average_rating, 1);
+
     ?>
     <main class="player">
         <span class="video__id__span">
