@@ -42,7 +42,8 @@ require_once "../models/videos.inc.php";
     $previous_rating = 0;
 
     // if user rated the video already, fetch previous rating
-    if (is_video_rated_by_user($pdo, $current_video_id, $current_user_id)) {
+
+    if ($current_user_id !== null && is_video_rated_by_user($pdo, $current_video_id, $current_user_id)) {
         $previous_rating = fetch_previous_rating_value($pdo, $current_video_id, $current_user_id);
     }
 
