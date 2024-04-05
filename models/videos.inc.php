@@ -194,3 +194,102 @@ function fetch_uploaded_videos(object $pdo, int $user_id): array
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $result;
 }
+
+// submit star rating
+function submit_star_rating(object $pdo, int $video_id, string $rating): void
+{
+    // if video is already rated by the user, adjust the ratings_sum and ratings_count accordingly, count should not be incremented and fetch latest ratings_sum and ratings_count from fetch_ratings_sum_and_count function
+    $ratings = fetch_ratings_sum_and_count($pdo, $video_id);
+    $ratings_sum = $ratings["ratings_sum"];
+    $ratings_count = $ratings["ratings_count"];
+    if (is_video_rated_by_user($pdo, $video_id, $_SESSION["user_id"])) {
+        $previous_rating = fetch_previous_rating_value($pdo, $video_id, $_SESSION["user_id"]);
+        $ratings_sum = ($ratings_sum - $previous_rating) + $rating;
+    } else {
+        $ratings_sum += $rating;
+        $ratings_count += 1;
+    }
+
+    // query to update video_ratings table
+    $query = "UPDATE video_ratings SET ratings_sum = :ratings_sum, ratings_count = :ratings_count WHERE video_id = :video_id";
+
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":video_id", $video_id, PDO::PARAM_INT);
+    $stmt->bindParam(":ratings_sum", $ratings_sum, PDO::PARAM_INT);
+    $stmt->bindParam(":ratings_count", $ratings_count, PDO::PARAM_INT);
+    $stmt->execute();
+
+    // mark the video as rated by the user
+    mark_video_as_rated($pdo, $video_id, $_SESSION["user_id"], $rating);
+}
+
+// if logged in user and uploader of the video are the same, return true
+function is_user_video_creator(object $pdo, int $user_id, int $video_id): bool
+{
+    $query = "SELECT * FROM videos WHERE user_id = :user_id AND video_id = :video_id";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":user_id", $user_id, PDO::PARAM_INT);
+    $stmt->bindParam(":video_id", $video_id, PDO::PARAM_INT);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($result === false) {
+        return false;
+    }
+
+    return true;
+}
+
+
+// update user_video_stats table to mark the video as rated by the user
+function mark_video_as_rated(object $pdo, int $video_id, int $user_id, string $rating): void
+{
+    // update `rated` enum to Y and update rated_at timestamp to current timestamp and also rating_value to the rating
+    $query = "UPDATE user_video_stats SET rated = 'Y', rating_value = :rating, rated_at = CURRENT_TIMESTAMP WHERE video_id = :video_id AND user_id = :user_id";
+
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":video_id", $video_id, PDO::PARAM_INT);
+    $stmt->bindParam(":user_id", $user_id, PDO::PARAM_INT);
+    $stmt->bindParam(":rating", $rating, PDO::PARAM_STR);
+    $stmt->execute();
+}
+
+// check if video is already rated by the user
+function is_video_rated_by_user(object $pdo, int $video_id, int $user_id): bool
+{
+    $query = "SELECT * FROM user_video_stats WHERE video_id = :video_id AND user_id = :user_id AND rated = 'Y'";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":video_id", $video_id, PDO::PARAM_INT);
+    $stmt->bindParam(":user_id", $user_id, PDO::PARAM_INT);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($result === false) {
+        return false;
+    }
+
+    return true;
+}
+
+// fetch sum and count of ratings for a video
+function fetch_ratings_sum_and_count(object $pdo, int $video_id): array
+{
+    $query = "SELECT ratings_sum, ratings_count FROM video_ratings WHERE video_id = :video_id";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":video_id", $video_id, PDO::PARAM_INT);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result;
+}
+
+// fetch previous rating value of the user
+function fetch_previous_rating_value(object $pdo, int $video_id, int $user_id): string
+{
+    $query = "SELECT rating_value FROM user_video_stats WHERE video_id = :video_id AND user_id = :user_id";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":video_id", $video_id, PDO::PARAM_INT);
+    $stmt->bindParam(":user_id", $user_id, PDO::PARAM_INT);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result["rating_value"];
+}

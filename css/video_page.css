@@ -68,4 +68,28 @@
   font-size: 1.2rem;
   cursor: pointer;
 }
+
+.star i {
+  color: rgba(243, 211, 28, 0.966);
+  transition: color 0.3s ease;
+  font-size: 1.25rem;
+}
+
+.star:hover i {
+  color: rgba(243, 211, 28, 0.966);
+  cursor: pointer;
+}
+
+.star:hover~.star i {
+  color: rgba(243, 211, 28, 0.966);
+}
+
+.video__id__span {
+  display: none;
+}
+
+.previous__rating {
+  font-size: 1.2rem;
+}
+
 /* Modifiers */

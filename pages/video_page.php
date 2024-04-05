@@ -37,8 +37,20 @@ require_once "../models/videos.inc.php";
         increment_video_views($pdo, $current_video_id, $current_user_id);
     }
 
+    // round average rating to 1 decimal place
+    $average_rating = round($average_rating, 1);
+    $previous_rating = 0;
+
+    // if user rated the video already, fetch previous rating
+    if (is_video_rated_by_user($pdo, $current_video_id, $current_user_id)) {
+        $previous_rating = fetch_previous_rating_value($pdo, $current_video_id, $current_user_id);
+    }
+
     ?>
     <main class="player">
+        <span class="video__id__span">
+            <?php echo $current_video_id; ?>
+        </span>
         <video class="player__video video-js" controls preload="auto" width="650" height="300" poster="../uploads/thumbnails/<?php echo $video['video_thumbnail']; ?>" data-setup="{}">
             <source src="../uploads/videos/<?php echo $video['video_path']; ?>" type="video/mp4" />
             <p class="vjs-no-js">
@@ -82,11 +94,23 @@ require_once "../models/videos.inc.php";
             <div class="player__stats__ratings">
                 <div class="player__stats__ratings__left">
                     <p class="rate">Rate this video: </p>
-                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <div id="stars">
+                        <span class="star" data-rating="1"><i class="far fa-star"></i></span>
+                        <span class="star" data-rating="2"><i class="far fa-star"></i></span>
+                        <span class="star" data-rating="3"><i class="far fa-star"></i></span>
+                        <span class="star" data-rating="4"><i class="far fa-star"></i></span>
+                        <span class="star" data-rating="5"><i class="far fa-star"></i></span>
+                    </div>
+                    <!-- if previous_rating is not 0 show it below -->
+                    <?php if ($previous_rating !== 0) : ?>
+                        <p class="previous__rating">
+                            Your rating: <span class="previous__rating__value"><?php echo $previous_rating; ?></span>
+                        </p>
+                    <?php endif; ?>
                 </div>
                 <div class="player__stats__ratings__right">
                     <p class="ratings">
-                        Rating: <span class="average__rating"><?php echo $average_rating; ?></span>
+                        Avg Rating: <span class="average__rating"><?php echo $average_rating; ?></span>
                     </p>
                 </div>
             </div>
@@ -103,6 +127,8 @@ require_once "../models/videos.inc.php";
 
     <?php
     check_and_print_video_subscription_errors();
+
+    check_and_print_star_rating_errors();
 
     if (isset($_GET["success"]) && $_GET["success"] === "user_subscribed") {
         echo <<<HTML
@@ -139,6 +165,30 @@ require_once "../models/videos.inc.php";
 
 
     <script src="../js/close_modal.js"></script>
+    <?php if (isset($current_user_id)) : ?>
+        <?php if (!is_user_video_creator($pdo, $current_user_id, $current_video_id)) : ?>
+            <script src="../js/star_rating.js"></script>
+        <?php endif; ?>
+
+        <?php if (is_user_video_creator($pdo, $current_user_id, $current_video_id)) : ?>
+            <script>
+                const stars = document.querySelectorAll(".star i");
+                stars.forEach(star => {
+                    star.style.cursor = "not-allowed";
+                });
+            </script>
+        <?php endif; ?>
+    <?php endif; ?>
+
+    <?php if (!isset($current_user_id)) : ?>
+        <script>
+            const stars2 = document.querySelectorAll(".star i");
+            stars2.forEach(star => {
+                star.style.cursor = "not-allowed";
+            });
+        </script>
+    <?php endif; ?>
+
 
     <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
 </body>
