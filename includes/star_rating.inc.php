@@ -32,6 +32,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errors[] = "Video does not exist";
         }
 
+        // check if user is the creator of the video
+        else if (is_user_video_creator($pdo, $_SESSION["user_id"], $video_id)) {
+            $errors[] = "You cannot rate your own video";
+        }
+
 
 
         if ($errors) {

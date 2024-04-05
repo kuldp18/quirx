@@ -205,3 +205,20 @@ function submit_star_rating(object $pdo, int $video_id, string $rating): void
     $stmt->bindParam(":video_id", $video_id, PDO::PARAM_INT);
     $stmt->execute();
 }
+
+// if logged in user and uploader of the video are the same, return true
+function is_user_video_creator(object $pdo, int $user_id, int $video_id): bool
+{
+    $query = "SELECT * FROM videos WHERE user_id = :user_id AND video_id = :video_id";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":user_id", $user_id, PDO::PARAM_INT);
+    $stmt->bindParam(":video_id", $video_id, PDO::PARAM_INT);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($result === false) {
+        return false;
+    }
+
+    return true;
+}

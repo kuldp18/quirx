@@ -151,13 +151,24 @@ require_once "../models/videos.inc.php";
 
     <script src="../js/close_modal.js"></script>
     <?php if (isset($current_user_id)) : ?>
-        <script src="../js/star_rating.js"></script>
+        <?php if (!is_user_video_creator($pdo, $current_user_id, $current_video_id)) : ?>
+            <script src="../js/star_rating.js"></script>
+        <?php endif; ?>
+
+        <?php if (is_user_video_creator($pdo, $current_user_id, $current_video_id)) : ?>
+            <script>
+                const stars = document.querySelectorAll(".star i");
+                stars.forEach(star => {
+                    star.style.cursor = "not-allowed";
+                });
+            </script>
+        <?php endif; ?>
     <?php endif; ?>
 
     <?php if (!isset($current_user_id)) : ?>
         <script>
-            const stars = document.querySelectorAll(".star i");
-            stars.forEach(star => {
+            const stars2 = document.querySelectorAll(".star i");
+            stars2.forEach(star => {
                 star.style.cursor = "not-allowed";
             });
         </script>
