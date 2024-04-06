@@ -42,6 +42,15 @@ require_once "../views/admin_manage_users.php";
 
     check_and_print_admin_edit_user_errors();
 
+    if (isset($_GET["user_update"]) && $_GET["user_update"] === "success") {
+        echo <<<HTML
+          <section class="modal modal--success">
+            <h1 class="modal__title">User updated successfully!</h1>
+            <span class="modal__close modal__close--success">X</span>
+          </section>
+        HTML;
+    }
+
 
     ?>
 
