@@ -2,7 +2,7 @@
 require_once "../includes/db_handler.inc.php";
 require_once "../includes/config_session.inc.php";
 require_once "../models/users.inc.php";
-// require_once "../views/video_tags.inc.php";
+require_once "../views/admin_manage_users.php";
 ?>
 
 <!DOCTYPE html>
@@ -40,29 +40,13 @@ require_once "../models/users.inc.php";
 
     $user_list = get_all_users($pdo);
 
+    check_and_print_admin_edit_user_errors();
+
 
     ?>
 
     <div class="container mt-3">
         <h1 class="mb-4 heading">Admin - Manage Users</h1>
-
-        <!-- Update User Form (Hidden by default) -->
-        <div class="mb-4 d-none" id="updateUserForm">
-            <h2>Update User</h2>
-            <form>
-                <div class="mb-3">
-                    <label for="updateName" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="updateName" placeholder="Enter name">
-                </div>
-                <div class="mb-3">
-                    <label for="updateEmail" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="updateEmail" placeholder="Enter email">
-                </div>
-                <button type="submit" class="btn btn-primary">Update</button>
-                <button type="button" class="btn btn-secondary" id="cancelUpdate">Cancel</button>
-            </form>
-        </div>
-
 
         <!-- Display Users Table -->
         <div class="mb-4">
@@ -105,14 +89,15 @@ require_once "../models/users.inc.php";
                                 <td><?php echo $user['role'] !== null ? htmlspecialchars($user['role']) : 'null'; ?></td>
                                 <td><?php echo $user['is_active'] !== null ? htmlspecialchars($user['is_active']) : 'null'; ?></td>
                                 <td>
-                                    <button class="btn btn-primary btn-sm update-btn">Edit</button>
-                                    <button class="btn btn-danger btn-sm delete-btn">Delete</button>
-                                    <button class="btn btn-success btn-sm more-btn">More</button>
+                                    <a href="<?php
+                                                echo "./admin_edit_user.php?user_id=" . $user['user_id'];
+                                                ?>" class="btn btn-primary btn-sm update-btn">Edit</a>
+                                    <a href="#" class="btn btn-danger btn-sm delete-btn">Delete</a>
+                                    <a href="#" class="btn btn-success btn-sm more-btn">More</a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
                     <?php endif; ?>
-
                 </tbody>
             </table>
         </div>
@@ -138,6 +123,8 @@ require_once "../models/users.inc.php";
             });
         });
     </script>
+
+    <script src="../js/close_modal.js"></script>
 </body>
 
 </html>
