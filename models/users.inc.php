@@ -26,3 +26,21 @@ function update_user_as_admin(object $pdo, int $user_id, string $updated_name, s
     $stmt = $pdo->prepare($query);
     $stmt->execute(['updated_name' => $updated_name, 'updated_email' => $updated_email, 'updated_username' => $updated_username, 'updated_role' => $updated_role, 'updated_status' => $updated_status, 'user_id' => $user_id]);
 }
+
+// delete user as admin
+function delete_user_as_admin(object $pdo, int $user_id): void
+{
+    // just set is_active to N
+    $query = "UPDATE users SET is_active = 'N', deleted_at = CURRENT_TIMESTAMP WHERE user_id = :user_id";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute(['user_id' => $user_id]);
+}
+
+// does user exist or not by id
+function does_user_exist(object $pdo, int $user_id): bool
+{
+    $query = "SELECT user_id FROM users WHERE user_id = :user_id";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute(['user_id' => $user_id]);
+    return $stmt->fetch(PDO::FETCH_ASSOC) ? true : false;
+}

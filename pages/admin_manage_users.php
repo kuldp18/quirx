@@ -41,11 +41,21 @@ require_once "../views/admin_manage_users.php";
     $user_list = get_all_users($pdo);
 
     check_and_print_admin_edit_user_errors();
+    check_and_print_admin_delete_user_errors();
 
     if (isset($_GET["user_update"]) && $_GET["user_update"] === "success") {
         echo <<<HTML
           <section class="modal modal--success">
             <h1 class="modal__title">User updated successfully!</h1>
+            <span class="modal__close modal__close--success">X</span>
+          </section>
+        HTML;
+    }
+
+    if (isset($_GET["user_delete"]) && $_GET["user_delete"] === "success") {
+        echo <<<HTML
+          <section class="modal modal--success">
+            <h1 class="modal__title">User soft-deleted successfully!</h1>
             <span class="modal__close modal__close--success">X</span>
           </section>
         HTML;
@@ -101,7 +111,7 @@ require_once "../views/admin_manage_users.php";
                                     <a href="<?php
                                                 echo "./admin_edit_user.php?user_id=" . $user['user_id'];
                                                 ?>" class="btn btn-primary btn-sm update-btn">Edit</a>
-                                    <a href="#" class="btn btn-danger btn-sm delete-btn">Delete</a>
+                                    <a href="<?php echo "./admin_delete_user.php?user_id=" . $user["user_id"]; ?>" class="btn btn-danger btn-sm delete-btn">Delete</a>
                                     <a href="#" class="btn btn-success btn-sm more-btn">More</a>
                                 </td>
                             </tr>
@@ -118,20 +128,6 @@ require_once "../views/admin_manage_users.php";
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js" integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-    <script>
-        // JavaScript for toggling update user form
-        $(document).ready(function() {
-            // Show update user form on edit button click
-            $('.btn-primary').click(function() {
-                $('#updateUserForm').removeClass('d-none');
-            });
-            // Hide update user form on cancel button click
-            $('#cancelUpdate').click(function() {
-                $('#updateUserForm').addClass('d-none');
-            });
-        });
-    </script>
 
     <script src="../js/close_modal.js"></script>
 </body>
