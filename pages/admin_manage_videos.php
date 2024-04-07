@@ -41,6 +41,7 @@ require_once "../views/admin_manage_videos.php";
     $video_list = fetch_all_videos($pdo);
 
     check_and_print_admin_delete_video_errors();
+    check_and_print_admin_edit_video_errors();
 
     if (isset($_GET["video_update"]) && $_GET["video_update"] === "success") {
         echo <<<HTML
