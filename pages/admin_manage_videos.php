@@ -2,7 +2,7 @@
 require_once "../includes/db_handler.inc.php";
 require_once "../includes/config_session.inc.php";
 require_once "../models/videos.inc.php";
-// require_once "../views/admin_manage_videos.php";
+require_once "../views/admin_manage_videos.php";
 ?>
 
 <!DOCTYPE html>
@@ -40,22 +40,21 @@ require_once "../models/videos.inc.php";
 
     $video_list = fetch_all_videos($pdo);
 
-    // check_and_print_admin_edit_user_errors();
-    // check_and_print_admin_delete_user_errors();
+    check_and_print_admin_delete_video_errors();
 
-    if (isset($_GET["user_update"]) && $_GET["user_update"] === "success") {
+    if (isset($_GET["video_update"]) && $_GET["video_update"] === "success") {
         echo <<<HTML
           <section class="modal modal--success">
-            <h1 class="modal__title">User updated successfully!</h1>
+            <h1 class="modal__title">Video updated successfully!</h1>
             <span class="modal__close modal__close--success">X</span>
           </section>
         HTML;
     }
 
-    if (isset($_GET["user_delete"]) && $_GET["user_delete"] === "success") {
+    if (isset($_GET["video_delete"]) && $_GET["video_delete"] === "success") {
         echo <<<HTML
           <section class="modal modal--success">
-            <h1 class="modal__title">User soft-deleted successfully!</h1>
+            <h1 class="modal__title">Video soft-deleted successfully!</h1>
             <span class="modal__close modal__close--success">X</span>
           </section>
         HTML;

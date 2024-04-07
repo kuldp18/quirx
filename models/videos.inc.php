@@ -293,3 +293,14 @@ function fetch_previous_rating_value(object $pdo, int $video_id, int $user_id): 
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     return $result["rating_value"];
 }
+
+
+// delete video as admin
+function delete_video_as_admin(object $pdo, string $video_id): void
+{
+    // just set is_active to N and update deleted_at timestamp
+    $query = "UPDATE videos SET is_active = 'N', deleted_at = CURRENT_TIMESTAMP WHERE video_id = :video_id";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":video_id", $video_id, PDO::PARAM_STR);
+    $stmt->execute();
+}
