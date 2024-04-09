@@ -13,6 +13,7 @@ require_once "../views/admin_manage_users.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - User Management</title>
     <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link rel="stylesheet" href="../css/global.css">
@@ -22,6 +23,23 @@ require_once "../views/admin_manage_users.php";
         .table {
             border: 1px solid whitesmoke;
             font-size: 1.2rem;
+        }
+
+        .btn {
+            width: 25px;
+            height: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .actions {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            justify-content: center;
+            align-items: center;
         }
     </style>
 </head>
@@ -107,12 +125,12 @@ require_once "../views/admin_manage_users.php";
                                 <td><?php echo $user['username'] !== null ? htmlspecialchars($user['username']) : 'null'; ?></td>
                                 <td><?php echo $user['role'] !== null ? htmlspecialchars($user['role']) : 'null'; ?></td>
                                 <td><?php echo $user['is_active'] !== null ? htmlspecialchars($user['is_active']) : 'null'; ?></td>
-                                <td>
+                                <td class="actions">
                                     <a href="<?php
                                                 echo "./admin_edit_user.php?user_id=" . $user['user_id'];
-                                                ?>" class="btn btn-primary btn-sm update-btn">Edit</a>
-                                    <a href="<?php echo "./admin_delete_user.php?user_id=" . $user["user_id"]; ?>" class="btn btn-danger btn-sm delete-btn">Delete</a>
-                                    <a href="#" class="btn btn-success btn-sm more-btn">More</a>
+                                                ?>" class="btn btn-primary btn-sm update-btn"><i class="fa-solid fa-pencil"></i></a>
+                                    <a href="<?php echo "./admin_delete_user.php?user_id=" . $user["user_id"]; ?>" class="btn btn-danger btn-sm delete-btn"><i class="fa-solid fa-trash"></i></a>
+                                    <a href="#" class="btn btn-success btn-sm more-btn"><i class="fa-solid fa-ellipsis"></i></a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
