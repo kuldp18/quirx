@@ -86,15 +86,15 @@ require_once "../views/admin_manage_videos.php";
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- check if user list is not empty -->
+                    <!-- check if video list is not empty -->
                     <?php if (empty($video_list)) : ?>
                         <tr>
-                            <td colspan="10">No users found</td>
+                            <td colspan="10">No videos found</td>
                         </tr>
                     <?php endif; ?>
 
                     <?php if (!empty($video_list)) : ?>
-                        <!-- loop through user list and display each user -->
+                        <!-- loop through videos list and display each user -->
 
                         <?php foreach ($video_list as $video) : ?>
                             <tr>
