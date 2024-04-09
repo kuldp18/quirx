@@ -32,8 +32,9 @@ require_once "../includes/config_session.inc.php";
         </div>
         <h2 class="subheading subheading--bigger">Admin Actions</h2>
         <section class="admin__actions">
-            <a href="./admin_manage_tags.php" class="admin__actions__link">Manage Video Tags</a>
             <a href="./admin_manage_users.php" class="admin__actions__link">Manage Users</a>
+            <a href="./admin_manage_videos.php" class="admin__actions__link">Manage Videos</a>
+            <a href="./admin_manage_tags.php" class="admin__actions__link">Manage Video Tags</a>
         </section>
     </main>
 
