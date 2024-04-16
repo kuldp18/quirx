@@ -35,8 +35,6 @@ require_once "../views/edit_video.inc.php";
     $video_details = fetch_video_by_id($pdo, $video_id);
     $video_tag_list = get_video_tags($pdo);
     $current_video_tags = get_video_tags_by_video_id($pdo, $video_id);
-    // print $current_video_tags;
-    print_r($current_video_tags);
     // just make a list of tags from the current video tags
     $current_video_tags = array_map(function ($tag) {
         return $tag['tag_name'];
@@ -47,7 +45,7 @@ require_once "../views/edit_video.inc.php";
     ?>
 
     <main class="edit">
-        <h1 class="heading heading--small">Edit Video</h1>
+        <h1 class="heading heading--small">Edit Your Video</h1>
         <form class="edit__form" method="post" action="../includes/edit_video.inc.php" enctype="multipart/form-data">
             <input type="text" name="title" class="edit__form__input" placeholder="Edit video title" value="<?php
                                                                                                             if (isset($video_details['video_title'])) {
