@@ -2,6 +2,7 @@
 require_once "../includes/db_handler.inc.php";
 require_once "../includes/config_session.inc.php";
 require_once "../models/videos.inc.php";
+require_once "../views/delete_video.inc.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,7 +32,29 @@ require_once "../models/videos.inc.php";
     if (isset($user_id)) {
         $uploads = fetch_uploaded_videos($pdo, $user_id);
     }
+    check_and_print_delete_video_errors();
+
+    if (isset($_GET["video_deleted"]) && $_GET["video_deleted"] === "success") {
+        echo <<<HTML
+          <section class="modal modal--success">
+            <h1 class="modal__title">Video deleted!</h1>
+            <span class="modal__close modal__close--success">X</span>
+          </section>
+        HTML;
+    }
+
+
+    if (isset($_GET["video_updated"]) && $_GET["video_updated"] === "success") {
+        echo <<<HTML
+          <section class="modal modal--success">
+            <h1 class="modal__title">Video updated!</h1>
+            <span class="modal__close modal__close--success">X</span>
+          </section>
+        HTML;
+    }
+
     ?>
+
 
     <main class="user_dashboard">
         <h1 class="heading">Your Dashboard</h1>
@@ -67,12 +90,9 @@ require_once "../models/videos.inc.php";
                                 <a href="<?php echo './edit_video.php?video_id=' . $video_id ?>" name="edit" class="video__btn video__btn--edit">
                                     <i class="fa-solid fa-pen"></i>
                                 </a>
-                                <form action="" method="post">
-                                    <input type="hidden" name="video_id" value="<?php echo $video_id ?>">
-                                    <button type="submit" class="video__btn video__btn--delete">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </button>
-                                </form>
+                                <a href="<?php echo './delete_video.php?video_id=' . $video_id ?>" name="delete" class="video__btn video__btn--delete">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
                             </div>
                         </article>
                     <?php } ?>
@@ -99,6 +119,9 @@ require_once "../models/videos.inc.php";
             }
         });
     </script>
+
+
+    <script src="../js/close_modal.js"></script>
 
 </body>
 
