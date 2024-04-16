@@ -5,7 +5,7 @@ declare(strict_types=1);
 // fetch all videos from the database
 function fetch_all_videos(object $pdo): array
 {
-    $query = "SELECT * FROM videos ORDER BY created_at DESC";
+    $query = "SELECT * FROM videos WHERE is_active = 'Y' ORDER BY created_at DESC";
     $stmt = $pdo->prepare($query);
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -187,7 +187,7 @@ function is_user_subscribed_to_creator(object $pdo, int $user_id, int $creator_i
 // fetch uploaded videos using user id
 function fetch_uploaded_videos(object $pdo, int $user_id): array
 {
-    $query = "SELECT * FROM videos WHERE user_id = :user_id ORDER BY created_at DESC";
+    $query = "SELECT * FROM videos WHERE user_id = :user_id AND is_active = 'Y' ORDER BY created_at DESC";
     $stmt = $pdo->prepare($query);
     $stmt->bindParam(":user_id", $user_id, PDO::PARAM_INT);
     $stmt->execute();
