@@ -316,3 +316,68 @@ function update_video_as_admin(object $pdo, string $video_id, string $updated_ti
     $stmt->bindParam(":is_active", $updated_status, PDO::PARAM_STR);
     $stmt->execute();
 }
+
+// edit video as user
+function edit_video_as_user(object $pdo, string $video_id, string $updated_title, string $updated_desc): void
+{
+    // update video details
+    $query = "UPDATE videos SET video_title = :video_title, video_desc = :video_desc, updated_at = CURRENT_TIMESTAMP WHERE video_id = :video_id";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":video_id", $video_id, PDO::PARAM_STR);
+    $stmt->bindParam(":video_title", $updated_title, PDO::PARAM_STR);
+    $stmt->bindParam(":video_desc", $updated_desc, PDO::PARAM_STR);
+    $stmt->execute();
+}
+
+
+// update video tags
+function update_video_tags(object $pdo, string $video_id, array $updated_tags): void
+{
+    // delete all tags associated with the video
+    $query = "DELETE FROM video_tag_associations WHERE video_id = :video_id";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":video_id", $video_id, PDO::PARAM_STR);
+    $stmt->execute();
+
+    // insert new tags
+    foreach ($updated_tags as $tag) {
+        $query = "INSERT INTO video_tag_associations (video_id, tag_id) VALUES (:video_id, (SELECT tag_id FROM video_tags WHERE tag_name = :tag_name))";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(":video_id", $video_id, PDO::PARAM_STR);
+        $stmt->bindParam(":tag_name", $tag, PDO::PARAM_STR);
+        $stmt->execute();
+    }
+}
+
+// update video thumbnail
+function update_video_thumbnail(object $pdo, string $video_id, array $updated_thumbnail): void
+{
+    if (!empty($updated_thumbnail)) {
+
+        // fetch necessary detail from the thumbnail array
+        $thumbnail_name = $updated_thumbnail['name'];
+
+        // move the thumbnail to the uploads folder
+        // encode thumbnail_name into a random string
+        $thumbnail_name = bin2hex(random_bytes(10)) . "." . pathinfo($thumbnail_name, PATHINFO_EXTENSION);
+        $thumbnail_destination = "../uploads/thumbnails/" . $thumbnail_name;
+
+        move_uploaded_file($updated_thumbnail['tmp_name'], $thumbnail_destination);
+
+        // update the thumbnail in the database
+        $query = "UPDATE videos SET video_thumbnail = :thumbnail WHERE video_id = :video_id";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(":video_id", $video_id, PDO::PARAM_STR);
+        $stmt->bindParam(":thumbnail", $thumbnail_name, PDO::PARAM_STR);
+        $stmt->execute();
+    }
+}
+
+// update updated_at timestamp
+function update_video_timestamp(object $pdo, string $video_id): void
+{
+    $query = "UPDATE videos SET updated_at = CURRENT_TIMESTAMP WHERE video_id = :video_id";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":video_id", $video_id, PDO::PARAM_STR);
+    $stmt->execute();
+}
