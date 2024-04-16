@@ -3,6 +3,7 @@ require_once "../includes/db_handler.inc.php";
 require_once "../includes/config_session.inc.php";
 require_once "../models/videos.inc.php";
 require_once "../models/video_tags.inc.php";
+require_once "../views/edit_video.inc.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,13 +35,18 @@ require_once "../models/video_tags.inc.php";
     $video_details = fetch_video_by_id($pdo, $video_id);
     $video_tag_list = get_video_tags($pdo);
     $current_video_tags = get_video_tags_by_video_id($pdo, $video_id);
+    // just make a list of tags from the current video tags
+    $current_video_tags = array_map(function ($tag) {
+        return $tag['tag_name'];
+    }, $current_video_tags);
 
+    check_and_print_edit_video_errors();
 
     ?>
 
     <main class="edit">
-        <h1 class="heading heading--small">Edit Video</h1>
-        <form class="edit__form" method="post">
+        <h1 class="heading heading--small">Edit Your Video</h1>
+        <form class="edit__form" method="post" action="../includes/edit_video.inc.php" enctype="multipart/form-data">
             <input type="text" name="title" class="edit__form__input" placeholder="Edit video title" value="<?php
                                                                                                             if (isset($video_details['video_title'])) {
                                                                                                                 echo $video_details['video_title'];
@@ -58,15 +64,16 @@ require_once "../models/video_tags.inc.php";
                     echo '<div class="edit__form__checkbox">';
                     echo '<label for="' . $tag['tag_name'] . '">' . $tag['tag_name'] . '</label>';
                     $tagChecked = in_array($tag['tag_name'], $current_video_tags) ? 'checked' : '';
-                    echo '<input type="checkbox" name="' . $tag['tag_name'] . '" value="' . $tag['tag_name'] . '" ' . $tagChecked . '>';
+                    echo '<input type="checkbox" name="tags[]" value="' . $tag['tag_name'] . '" ' . $tagChecked . '>';
                     echo '</div>';
                 }
                 ?>
             </div>
             <div class="edit__form__thumbnail">
-                <label for="thumbnail">Change or remove thumbnail:</label>
+                <label for="thumbnail">Change or add thumbnail:</label>
                 <input type="file" name="thumbnail" class="edit__form__input">
             </div>
+            <input type="hidden" name="video_id" value="<?php echo $video_id; ?>">
             <input type="submit" value="Edit video" class="edit__btn">
         </form>
     </main>
@@ -74,6 +81,8 @@ require_once "../models/video_tags.inc.php";
     <script>
         $('textarea').autoResize();
     </script>
+
+    <script src="../js/close_modal.js"></script>
 
 </body>
 
