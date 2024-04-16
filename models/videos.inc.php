@@ -321,7 +321,7 @@ function update_video_as_admin(object $pdo, string $video_id, string $updated_ti
 function edit_video_as_user(object $pdo, string $video_id, string $updated_title, string $updated_desc): void
 {
     // update video details
-    $query = "UPDATE videos SET video_title = :video_title, video_desc = :video_desc, updated_at = CURRENT_TIMESTAMP WHERE video_id = :video_id";
+    $query = "UPDATE videos SET video_title = :video_title, video_desc = :video_desc WHERE video_id = :video_id";
     $stmt = $pdo->prepare($query);
     $stmt->bindParam(":video_id", $video_id, PDO::PARAM_STR);
     $stmt->bindParam(":video_title", $updated_title, PDO::PARAM_STR);
@@ -362,14 +362,18 @@ function update_video_thumbnail(object $pdo, string $video_id, array $updated_th
         $thumbnail_name = bin2hex(random_bytes(10)) . "." . pathinfo($thumbnail_name, PATHINFO_EXTENSION);
         $thumbnail_destination = "../uploads/thumbnails/" . $thumbnail_name;
 
-        move_uploaded_file($updated_thumbnail['tmp_name'], $thumbnail_destination);
 
-        // update the thumbnail in the database
-        $query = "UPDATE videos SET video_thumbnail = :thumbnail WHERE video_id = :video_id";
-        $stmt = $pdo->prepare($query);
-        $stmt->bindParam(":video_id", $video_id, PDO::PARAM_STR);
-        $stmt->bindParam(":thumbnail", $thumbnail_name, PDO::PARAM_STR);
-        $stmt->execute();
+
+        // Move the uploaded file
+        if (move_uploaded_file($updated_thumbnail['tmp_name'], $thumbnail_destination)) {
+
+            // update the thumbnail in the database
+            $query = "UPDATE videos SET video_thumbnail = :thumbnail WHERE video_id = :video_id";
+            $stmt = $pdo->prepare($query);
+            $stmt->bindParam(":video_id", $video_id, PDO::PARAM_STR);
+            $stmt->bindParam(":thumbnail", $thumbnail_name, PDO::PARAM_STR);
+            $stmt->execute();
+        }
     }
 }
 
