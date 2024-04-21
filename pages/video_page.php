@@ -102,6 +102,12 @@ require_once "../models/videos.inc.php";
                         <span class="star" data-rating="4"><i class="far fa-star"></i></span>
                         <span class="star" data-rating="5"><i class="far fa-star"></i></span>
                     </div>
+                    <form class="report__container">
+                        <input type="hidden" value="<?php echo $current_video_id; ?>" name="video_id">
+                        <button class="report__btn" type="submit">
+                            <i class="fas fa-flag"></i>
+                        </button>
+                    </form>
                     <!-- if previous_rating is not 0 show it below -->
                     <?php if ($previous_rating !== 0) : ?>
                         <p class="previous__rating">
