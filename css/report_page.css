@@ -1,0 +1,10 @@
+.container {
+    font-size: 1.5rem;
+}
+
+form,
+.form-control,
+.btn,
+input {
+    font-size: inherit;
+}
