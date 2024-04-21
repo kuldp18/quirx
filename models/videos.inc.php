@@ -5,7 +5,7 @@ declare(strict_types=1);
 // fetch all videos from the database
 function fetch_all_videos(object $pdo): array
 {
-    $query = "SELECT * FROM videos WHERE is_active = 'Y' ORDER BY created_at DESC";
+    $query = "SELECT * FROM videos ORDER BY created_at DESC";
     $stmt = $pdo->prepare($query);
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -383,5 +383,15 @@ function update_video_timestamp(object $pdo, string $video_id): void
     $query = "UPDATE videos SET updated_at = CURRENT_TIMESTAMP WHERE video_id = :video_id";
     $stmt = $pdo->prepare($query);
     $stmt->bindParam(":video_id", $video_id, PDO::PARAM_STR);
+    $stmt->execute();
+}
+
+// update video status (is_active)
+function update_video_status(object $pdo, string $video_id, string $updated_status): void
+{
+    $query = "UPDATE videos SET is_active = :is_active, updated_at = CURRENT_TIMESTAMP WHERE video_id = :video_id";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":video_id", $video_id, PDO::PARAM_STR);
+    $stmt->bindParam(":is_active", $updated_status, PDO::PARAM_STR);
     $stmt->execute();
 }

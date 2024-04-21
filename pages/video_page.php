@@ -102,6 +102,11 @@ require_once "../models/videos.inc.php";
                         <span class="star" data-rating="4"><i class="far fa-star"></i></span>
                         <span class="star" data-rating="5"><i class="far fa-star"></i></span>
                     </div>
+
+                    <a class="report__btn" type="submit" href="<?php echo "./report_page.php" . "?video_id=" . $current_video_id; ?>">
+                        <i class="fas fa-flag"></i>
+                    </a>
+
                     <!-- if previous_rating is not 0 show it below -->
                     <?php if ($previous_rating !== 0) : ?>
                         <p class="previous__rating">
@@ -155,6 +160,24 @@ require_once "../models/videos.inc.php";
         echo <<<HTML
           <section class="modal modal--success">
             <h1 class="modal__title">User unsubscribed!</h1>
+            <span class="modal__close modal__close--success">X</span>
+          </section>
+        HTML;
+    }
+
+
+    if (isset($_GET["video_report"]) && $_GET["video_report"] === "success") {
+        echo <<<HTML
+          <section class="modal modal--success">
+            <h1 class="modal__title">Video report submitted.</h1>
+            <span class="modal__close modal__close--success">X</span>
+          </section>
+        HTML;
+    }
+    if (isset($_GET["user_report"]) && $_GET["user_report"] === "success") {
+        echo <<<HTML
+          <section class="modal modal--success">
+            <h1 class="modal__title">User report submitted.</h1>
             <span class="modal__close modal__close--success">X</span>
           </section>
         HTML;
