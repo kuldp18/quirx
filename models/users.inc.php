@@ -44,3 +44,11 @@ function does_user_exist(object $pdo, int $user_id): bool
     $stmt->execute(['user_id' => $user_id]);
     return $stmt->fetch(PDO::FETCH_ASSOC) ? true : false;
 }
+
+// update user status 
+function update_user_status(object $pdo, int $user_id, string $updated_status): void
+{
+    $query = "UPDATE users SET is_active = :updated_status, updated_at = CURRENT_TIMESTAMP WHERE user_id = :user_id";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute(['updated_status' => $updated_status, 'user_id' => $user_id]);
+}

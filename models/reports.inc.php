@@ -34,6 +34,15 @@ function get_all_video_reports(object $pdo): array
     $stmt->execute();
     return $stmt->fetchAll();
 }
+// get all user reports
+function get_all_user_reports(object $pdo): array
+{
+    // user_reports has fields: user_report_id, target_user_id, user_id, reason, reported_at, updated_at, status, target_user_id is foreign key to users table, user_id is foreign key to users table
+    $query = "SELECT user_reports.user_report_id, user_reports.target_user_id, user_reports.user_id, user_reports.reason, user_reports.reported_at, user_reports.updated_at, user_reports.status, users.username, target_user.username AS target_username FROM user_reports JOIN users ON user_reports.user_id = users.user_id JOIN users AS target_user ON user_reports.target_user_id = target_user.user_id";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
 
 // update video report as admin 
 function update_video_report(object $pdo, int $video_report_id, string $status): void
@@ -42,5 +51,15 @@ function update_video_report(object $pdo, int $video_report_id, string $status):
     $stmt = $pdo->prepare($query);
     $stmt->bindParam(":status", $status, PDO::PARAM_STR);
     $stmt->bindParam(":video_report_id", $video_report_id, PDO::PARAM_INT);
+    $stmt->execute();
+}
+
+// update user report as admin
+function update_user_report(object $pdo, int $user_report_id, string $status): void
+{
+    $query = "UPDATE user_reports SET status = :status, updated_at = CURRENT_TIMESTAMP WHERE user_report_id = :user_report_id";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":status", $status, PDO::PARAM_STR);
+    $stmt->bindParam(":user_report_id", $user_report_id, PDO::PARAM_INT);
     $stmt->execute();
 }
