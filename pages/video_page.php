@@ -165,6 +165,24 @@ require_once "../models/videos.inc.php";
         HTML;
     }
 
+
+    if (isset($_GET["video_report"]) && $_GET["video_report"] === "success") {
+        echo <<<HTML
+          <section class="modal modal--success">
+            <h1 class="modal__title">Video report submitted.</h1>
+            <span class="modal__close modal__close--success">X</span>
+          </section>
+        HTML;
+    }
+    if (isset($_GET["user_report"]) && $_GET["user_report"] === "success") {
+        echo <<<HTML
+          <section class="modal modal--success">
+            <h1 class="modal__title">User report submitted.</h1>
+            <span class="modal__close modal__close--success">X</span>
+          </section>
+        HTML;
+    }
+
     ?>
 
 

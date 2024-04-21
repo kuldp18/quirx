@@ -1,8 +1,7 @@
 <?php
 require_once "../includes/db_handler.inc.php";
 require_once "../includes/config_session.inc.php";
-// require_once "../models/users.inc.php";
-// require_once "../views/admin_manage_users.php";
+require_once "../views/reports.inc.php";
 ?>
 
 <!DOCTYPE html>
@@ -32,16 +31,9 @@ require_once "../includes/config_session.inc.php";
         exit();
     }
 
+    $video_id = $_GET['video_id'];
 
-    // if (isset($_GET["user_update"]) && $_GET["user_update"] === "success") {
-    //     echo <<<HTML
-    //       <section class="modal modal--success">
-    //         <h1 class="modal__title">User updated successfully!</h1>
-    //         <span class="modal__close modal__close--success">X</span>
-    //       </section>
-    //     HTML;
-    // }
-
+    check_and_print_report_errors();
 
     ?>
 
@@ -64,6 +56,7 @@ require_once "../includes/config_session.inc.php";
                 <label for="reason">Reason</label>
                 <textarea class="form-control" id="reason" name="reason" rows="2" placeholder="describe your issue here.." required></textarea>
             </div>
+            <input type="hidden" name="video_id" value="<?php echo $video_id; ?>">
             <button type="submit" class="btn btn-danger mt-3">Report</button>
         </form>
     </main>
