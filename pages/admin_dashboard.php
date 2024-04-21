@@ -35,6 +35,8 @@ require_once "../includes/config_session.inc.php";
             <a href="./admin_manage_users.php" class="admin__actions__link">Manage Users</a>
             <a href="./admin_manage_videos.php" class="admin__actions__link">Manage Videos</a>
             <a href="./admin_manage_tags.php" class="admin__actions__link">Manage Video Tags</a>
+            <a href="./admin_manage_video_reports.php" class="admin__actions__link">Manage Video Reports</a>
+            <a href="./admin_manage_user_reports.php" class="admin__actions__link">Manage User Reports</a>
         </section>
     </main>
 
